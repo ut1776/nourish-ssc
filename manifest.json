@@ -1,0 +1,10 @@
+{
+"name": "NOURISH-SSc",
+"short_name": "NOURISH-SSc",
+"description": "A personal symptom and nutrition check-in journal for people with systemic sclerosis.",
+"start_url": "./",
+"scope": "./",
+"display": "standalone",
+"background_color": "#f7f8f5",
+"theme_color": "#315f56"
+}
