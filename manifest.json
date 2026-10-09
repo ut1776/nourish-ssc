@@ -1,4 +1,5 @@
-<escape>{
+<escape>
+{
 "name": "NOURISH-SSc",
 "short_name": "NOURISH-SSc",
 "description": "A personal symptom and nutrition check-in journal for people with systemic sclerosis.",
@@ -15,5 +16,5 @@
 "purpose": "any"
 }
 ]
-}</escape>
-
+}
+</escape>
