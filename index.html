@@ -1,0 +1,591 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#103e40">
+<title>NOURISH-SSc</title>
+<style>
+:root {
+  --bg:#f4f7f5;
+  --card:#ffffff;
+  --ink:#183738;
+  --muted:#667c7a;
+  --teal:#176b67;
+  --mint:#dcefe8;
+  --line:#dce6e1;
+  --gold:#f1dca9;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  line-height:1.5;
+}
+header {
+  background:#103e40;
+  color:white;
+  padding:26px 20px 22px;
+}
+.wrap { max-width:760px; margin:auto; }
+.eyebrow {
+  font-size:11px;
+  letter-spacing:2px;
+  font-weight:700;
+  color:#b8dfd1;
+}
+h1 { font-size:29px; margin:5px 0; letter-spacing:-.8px; }
+header p { margin:5px 0 0; color:#d5e8e1; font-size:14px; }
+nav {
+  display:flex;
+  background:white;
+  border-bottom:1px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:5;
+}
+nav button {
+  flex:1;
+  border:0;
+  background:white;
+  padding:15px 5px;
+  color:var(--muted);
+  font-size:13px;
+  font-weight:700;
+  border-bottom:3px solid transparent;
+}
+nav button.active {
+  color:var(--teal);
+  border-bottom-color:var(--teal);
+}
+main { max-width:760px; margin:auto; padding:22px 16px 50px; }
+h2 { font-size:23px; margin:0 0 6px; letter-spacing:-.4px; }
+h3 { font-size:16px; margin:0 0 12px; }
+.intro { color:var(--muted); font-size:14px; margin:0 0 20px; }
+.card {
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:19px;
+  margin-bottom:15px;
+}
+label,.field-label {
+  display:block;
+  font-size:13px;
+  font-weight:700;
+  margin-bottom:7px;
+}
+input,select,textarea {
+  width:100%;
+  border:1px solid #cbd9d3;
+  background:white;
+  color:var(--ink);
+  border-radius:10px;
+  padding:12px;
+  font:inherit;
+  font-size:15px;
+  margin-bottom:16px;
+}
+textarea { min-height:100px; resize:vertical; }
+input:focus,select:focus,textarea:focus {
+  outline:2px solid #78b7a7;
+  outline-offset:1px;
+}
+small,.hint { color:var(--muted); font-size:12px; }
+.scale {
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:7px;
+  margin:8px 0 5px;
+}
+.scale label {
+  text-align:center;
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:9px 2px;
+  font-size:13px;
+  cursor:pointer;
+  margin:0;
+}
+.scale input { width:auto; margin:0 0 4px; accent-color:var(--teal); }
+.scale span { display:block; font-weight:500; font-size:10px; }
+.question { margin:0 0 21px; }
+.question p { margin:0; font-size:14px; font-weight:700; }
+button.primary,button.secondary,button.danger {
+  border:0;
+  border-radius:10px;
+  padding:13px 16px;
+  font:inherit;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+}
+button.primary { background:var(--teal); color:white; width:100%; }
+button.secondary { background:var(--mint); color:var(--ink); }
+button.danger { background:#f9e7e4; color:#8c3128; }
+button:focus-visible { outline:3px solid #78b7a7; outline-offset:2px; }
+.notice {
+  border-radius:12px;
+  padding:13px 15px;
+  background:#e6f0eb;
+  color:#355b50;
+  font-size:13px;
+  margin-bottom:17px;
+}
+.pill {
+  display:inline-block;
+  background:var(--mint);
+  color:#285a50;
+  padding:4px 9px;
+  border-radius:20px;
+  font-size:11px;
+  font-weight:700;
+}
+.entry { border-bottom:1px solid var(--line); padding:14px 0; }
+.entry:last-child { border-bottom:0; }
+.entry-date { font-weight:700; font-size:14px; }
+.entry-details { color:var(--muted); font-size:13px; margin:5px 0 9px; }
+.barrow { margin:14px 0; }
+.barhead { display:flex; justify-content:space-between; gap:10px; font-size:13px; margin-bottom:6px; }
+.bartrack { height:9px; background:#e6eeea; border-radius:20px; overflow:hidden; }
+.barfill { height:100%; background:#36877a; border-radius:20px; }
+.empty { color:var(--muted); text-align:center; padding:24px 8px; font-size:14px; }
+.summary-box {
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+  font-size:14px;
+  background:#f7f9f7;
+  border:1px solid var(--line);
+  padding:15px;
+  border-radius:10px;
+}
+footer { text-align:center; color:var(--muted); font-size:11px; padding:12px 16px 28px; }
+.hidden { display:none !important; }
+@media(min-width:600px) {
+  header { padding:32px 28px 26px; }
+  main { padding:28px 24px 55px; }
+  h1 { font-size:34px; }
+  .card { padding:23px; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">A PERSONAL SYMPTOM JOURNAL</div>
+    <h1>NOURISH-SSc</h1>
+    <p>Notice patterns. Share your experience. Support conversations.</p>
+  </div>
+</header>
+
+<nav aria-label="Main navigation">
+  <button class="active" data-tab="checkin">Check-in</button>
+  <button data-tab="trends">My Trends</button>
+  <button data-tab="summary">Care Summary</button>
+</nav>
+
+<main>
+<section id="checkin">
+  <h2>Your check-in</h2>
+  <p class="intro">Record how you have been feeling. There are no right or wrong answers.</p>
+  <div class="notice">Your experience matters. This journal helps you record symptoms; it does not diagnose conditions or recommend treatment.</div>
+
+  <form id="entryForm">
+    <div class="card">
+      <h3>About today</h3>
+      <label for="entryDate">Date of check-in</label>
+      <input id="entryDate" name="date" type="date" required>
+
+      <label for="intake">How has eating been today?</label>
+      <select id="intake" name="intake">
+        <option value="Usual">About as usual</option>
+        <option value="A little less">A little less than usual</option>
+        <option value="Much less">Much less than usual</option>
+        <option value="Unable to eat normally">Unable to eat normally</option>
+        <option value="Not sure">Not sure</option>
+      </select>
+
+      <label for="appetite">How has your appetite been?</label>
+      <select id="appetite" name="appetite">
+        <option value="Usual">About as usual</option>
+        <option value="Lower">Lower than usual</option>
+        <option value="Very low">Very low</option>
+        <option value="Variable">It varies</option>
+      </select>
+    </div>
+
+    <div class="card">
+      <h3>Symptoms today</h3>
+      <p class="intro">For each item, choose how much it bothered you today.</p>
+      <div id="questions"></div>
+      <small>These simple 0–4 ratings are for personal tracking. They are not a validated questionnaire or clinical score.</small>
+    </div>
+
+    <div class="card">
+      <h3>Anything else to remember?</h3>
+      <label for="notes">Notes (optional)</label>
+      <textarea id="notes" name="notes" maxlength="1500" placeholder="For example: what was difficult, what helped, or what you want to discuss at your next appointment."></textarea>
+      <small>Keep notes brief. Avoid names and other identifying information.</small>
+    </div>
+    <button class="primary" type="submit">Save check-in on this device</button>
+  </form>
+  <p id="saveMessage" class="notice hidden" role="status"></p>
+</section>
+
+<section id="trends" class="hidden">
+  <h2>My trends</h2>
+  <p class="intro">Review your own saved check-ins over time.</p>
+  <div class="notice">Ratings are personal observations, not medical measurements. A change does not establish its cause.</div>
+  <div class="card">
+    <h3>Symptom ratings in your latest check-in</h3>
+    <div id="trendChart"><div class="empty">No entries yet. Save a check-in to begin.</div></div>
+  </div>
+  <div class="card">
+    <h3>Saved check-ins</h3>
+    <div id="entryList"><div class="empty">Your saved check-ins will appear here.</div></div>
+  </div>
+  <div class="card">
+    <h3>Data controls</h3>
+    <p class="intro">Entries are stored in this browser on this device. They are not synced or backed up.</p>
+    <button class="danger" id="clearEntries" type="button">Delete all saved entries</button>
+  </div>
+</section>
+
+<section id="summary" class="hidden">
+  <h2>Care summary</h2>
+  <p class="intro">Create a draft from your saved check-ins to review before a healthcare appointment.</p>
+  <div class="notice">This summary is generated from your entries, not reviewed or verified by a clinician. Please check it for accuracy before sharing.</div>
+  <div class="card">
+    <label for="period">Include entries from</label>
+    <select id="period">
+      <option value="all">All saved entries</option>
+      <option value="30">The last 30 days</option>
+      <option value="7">The last 7 days</option>
+    </select>
+    <div id="summaryOutput" class="summary-box">Save a check-in to create your care summary.</div>
+    <button class="primary" id="copySummary" type="button" style="margin-top:14px">Copy summary text</button>
+    <p id="copyMessage" class="hint" role="status"></p>
+  </div>
+</section>
+</main>
+
+<footer>
+  NOURISH-SSc prototype · Not for diagnosis or treatment decisions.<br>
+  Use fictional entries for testing. This version is not a secure medical record.
+</footer>
+
+<script>
+(function() {
+  "use strict";
+
+  const STORAGE_KEY = "nourish_ssc_entries_v1";
+  const symptoms = [
+    {key:"reflux", label:"Heartburn or acid reflux"},
+    {key:"swallowing", label:"Difficulty swallowing"},
+    {key:"bloating", label:"Bloating or feeling overly full"},
+    {key:"nausea", label:"Nausea or stomach discomfort"},
+    {key:"bowel", label:"Bowel symptoms"},
+    {key:"eating", label:"Difficulty eating enough"}
+  ];
+  const scaleLabels = [
+    "0 · None", "1 · Mild", "2 · Moderate", "3 · A lot", "4 · Severe"
+  ];
+
+  const $ = id => document.getElementById(id);
+  let entries = loadEntries();
+
+  function loadEntries() {
+    try {
+      const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      return Array.isArray(data) ? data : [];
+    } catch (error) {
+      return [];
+    }
+  }
+
+  function persist() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function escapeHTML(value) {
+    return String(value == null ? "" : value).replace(/[&<>"']/g, char => ({
+      "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;", "'":"&#39;"
+    }[char]));
+  }
+
+  function localDateString(date) {
+    const d = date || new Date();
+    return d.getFullYear() + "-" +
+      String(d.getMonth() + 1).padStart(2, "0") + "-" +
+      String(d.getDate()).padStart(2, "0");
+  }
+
+  function formatDate(value) {
+    if (!value) return "Date not set";
+    const parts = value.split("-").map(Number);
+    if (parts.length !== 3 || parts.some(Number.isNaN)) return value;
+    return new Date(parts[0], parts[1]-1, parts[2]).toLocaleDateString(
+      undefined, {year:"numeric", month:"short", day:"numeric"}
+    );
+  }
+
+  function renderQuestions() {
+    $("questions").innerHTML = symptoms.map(item => `
+      <div class="question">
+        <p>${escapeHTML(item.label)}</p>
+        <div class="scale">
+          ${scaleLabels.map((label, index) => `
+            <label>
+              <input type="radio" name="${item.key}" value="${index}"
+                ${index === 0 ? "checked" : ""}>
+              ${index}
+              <span>${label.split(" · ")[1]}</span>
+            </label>
+          `).join("")}
+        </div>
+      </div>
+    `).join("");
+  }
+
+  function selectedRating(key) {
+    const input = document.querySelector('input[name="' + key + '"]:checked');
+    return input ? Number(input.value) : 0;
+  }
+
+  function setTab(tab) {
+    ["checkin", "trends", "summary"].forEach(name => {
+      $(name).classList.toggle("hidden", name !== tab);
+    });
+    document.querySelectorAll("nav button").forEach(button => {
+      const active = button.dataset.tab === tab;
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-current", active ? "page" : "false");
+    });
+    if (tab === "trends") renderTrends();
+    if (tab === "summary") renderSummary();
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+
+  document.querySelectorAll("nav button").forEach(button => {
+    button.addEventListener("click", () => setTab(button.dataset.tab));
+  });
+
+  $("entryDate").value = localDateString();
+  renderQuestions();
+
+  $("entryForm").addEventListener("submit", event => {
+    event.preventDefault();
+    const entry = {
+      id: (Date.now().toString(36) + Math.random().toString(36).slice(2, 8)),
+      date: $("entryDate").value,
+      intake: $("intake").value,
+      appetite: $("appetite").value,
+      notes: $("notes").value.trim(),
+      symptoms: {}
+    };
+    symptoms.forEach(item => {
+      entry.symptoms[item.key] = selectedRating(item.key);
+    });
+
+    entries.push(entry);
+    entries.sort((a,b) => b.date.localeCompare(a.date));
+
+    if (!persist()) {
+      entries = entries.filter(item => item.id !== entry.id);
+      $("saveMessage").textContent =
+        "Could not save this entry. Your browser storage may be unavailable or full.";
+      $("saveMessage").classList.remove("hidden");
+      return;
+    }
+
+    $("saveMessage").textContent =
+      "Check-in saved on this device. You can view it under My Trends.";
+    $("saveMessage").classList.remove("hidden");
+    $("notes").value = "";
+    $("intake").value = "Usual";
+    $("appetite").value = "Usual";
+    renderQuestions();
+    $("entryDate").value = localDateString();
+    renderTrends();
+  });
+
+  function renderTrends() {
+    const chart = $("trendChart");
+    const list = $("entryList");
+
+    if (!entries.length) {
+      chart.innerHTML = '<div class="empty">No entries yet. Save a check-in to begin.</div>';
+      list.innerHTML = '<div class="empty">Your saved check-ins will appear here.</div>';
+      return;
+    }
+
+    const latest = [...entries].sort((a,b) => b.date.localeCompare(a.date))[0];
+    chart.innerHTML = symptoms.map(item => {
+      const rating = Number(latest.symptoms && latest.symptoms[item.key]) || 0;
+      return `
+        <div class="barrow">
+          <div class="barhead">
+            <span>${escapeHTML(item.label)}</span><strong>${rating}/4</strong>
+          </div>
+          <div class="bartrack" role="img" aria-label="${escapeHTML(item.label)}: ${rating} out of 4">
+            <div class="barfill" style="width:${rating * 25}%"></div>
+          </div>
+        </div>
+      `;
+    }).join("") + `<p class="hint">Latest entry: ${escapeHTML(formatDate(latest.date))}. These bars show one check-in, not a clinical assessment.</p>`;
+
+    list.innerHTML = [...entries]
+      .sort((a,b) => b.date.localeCompare(a.date))
+      .map(entry => {
+        const ratings = symptoms.map(item =>
+          Number(entry.symptoms && entry.symptoms[item.key]) || 0
+        );
+        const marked = symptoms.filter(item =>
+          Number(entry.symptoms && entry.symptoms[item.key]) > 0
+        ).map(item => item.label);
+        return `
+          <div class="entry">
+            <div class="entry-date">${escapeHTML(formatDate(entry.date))}</div>
+            <div class="entry-details">
+              Eating: ${escapeHTML(entry.intake)} · Appetite: ${escapeHTML(entry.appetite)}
+            </div>
+            ${marked.length
+              ? `<p class="hint">Rated above zero: ${escapeHTML(marked.join(", "))}</p>`
+              : `<p class="hint">No symptoms rated above zero.</p>`}
+            ${entry.notes
+              ? `<p>${escapeHTML(entry.notes)}</p>` : ""}
+            <button class="secondary" type="button" data-delete="${escapeHTML(entry.id)}">Delete this entry</button>
+          </div>
+        `;
+      }).join("");
+
+    list.querySelectorAll("[data-delete]").forEach(button => {
+      button.addEventListener("click", () => {
+        const id = button.dataset.delete;
+        if (!window.confirm("Delete this check-in permanently from this browser?")) return;
+        entries = entries.filter(entry => entry.id !== id);
+        persist();
+        renderTrends();
+        renderSummary();
+      });
+    });
+  }
+
+  $("clearEntries").addEventListener("click", () => {
+    if (!entries.length) {
+      window.alert("There are no saved entries to delete.");
+      return;
+    }
+    if (!window.confirm("Delete ALL saved NOURISH-SSc entries from this browser? This cannot be undone.")) return;
+    entries = [];
+    persist();
+    renderTrends();
+    renderSummary();
+  });
+
+  function filteredEntries() {
+    const days = $("period").value;
+    if (days === "all") return [...entries].sort((a,b) => a.date.localeCompare(b.date));
+    const cutoff = new Date();
+    cutoff.setDate(cutoff.getDate() - Number(days));
+    const cutoffString = localDateString(cutoff);
+    return entries.filter(entry => entry.date >= cutoffString)
+      .sort((a,b) => a.date.localeCompare(b.date));
+  }
+
+  function buildSummary() {
+    const selected = filteredEntries();
+    if (!selected.length) {
+      return "No saved check-ins in the selected period.";
+    }
+
+    const lines = [
+      "NOURISH-SSc — PERSONAL CARE SUMMARY",
+      "Prepared: " + formatDate(localDateString()),
+      "Period: " + formatDate(selected[0].date) + " to " +
+        formatDate(selected[selected.length - 1].date),
+      "Number of check-ins: " + selected.length,
+      "",
+      "This summary reflects self-reported journal entries. It is not a diagnosis, validated score, or clinical assessment.",
+      "",
+      "EATING AND APPETITE"
+    ];
+
+    selected.forEach(entry => {
+      lines.push(formatDate(entry.date) + ": Eating — " + entry.intake +
+        "; appetite — " + entry.appetite + ".");
+    });
+
+    lines.push("", "SYMPTOM RATINGS (0 = none, 4 = severe)");
+    symptoms.forEach(item => {
+      const values = selected.map(entry => ({
+        date: entry.date,
+        value: Number(entry.symptoms && entry.symptoms[item.key]) || 0
+      }));
+      const average = values.reduce((sum, item) => sum + item.value, 0) / values.length;
+      lines.push(item.label + ": average " + average.toFixed(1) +
+        "/4 across " + values.length + " check-in(s).");
+    });
+
+    const notes = selected.filter(entry => entry.notes);
+    lines.push("", "PERSONAL NOTES");
+    if (!notes.length) {
+      lines.push("No notes recorded.");
+    } else {
+      notes.forEach(entry => {
+        lines.push(formatDate(entry.date) + ": " + entry.notes);
+      });
+    }
+
+    lines.push("", "QUESTIONS FOR MY HEALTHCARE TEAM",
+      "• Which symptoms or changes should I discuss?",
+      "• Could my eating difficulties or symptoms need further assessment?",
+      "• What support or next steps are appropriate for me?",
+      "",
+      "Please review this summary for accuracy before sharing.");
+    return lines.join("\n");
+  }
+
+  function renderSummary() {
+    $("summaryOutput").textContent = buildSummary();
+  }
+
+  $("period").addEventListener("change", renderSummary);
+
+  $("copySummary").addEventListener("click", async () => {
+    const text = buildSummary();
+    try {
+      if (navigator.clipboard && window.isSecureContext) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        const area = document.createElement("textarea");
+        area.value = text;
+        area.style.position = "fixed";
+        area.style.opacity = "0";
+        document.body.appendChild(area);
+        area.select();
+        const copied = document.execCommand("copy");
+        area.remove();
+        if (!copied) throw new Error("Copy unavailable");
+      }
+      $("copyMessage").textContent =
+        "Summary copied. You can paste it into a document to review.";
+    } catch (error) {
+      $("copyMessage").textContent =
+        "Automatic copy was unavailable. Press and hold the summary text to select and copy it.";
+    }
+  });
+
+  renderTrends();
+})();
+</script>
+</body>
+</html>
