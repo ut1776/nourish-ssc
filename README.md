@@ -4,102 +4,102 @@
 
 **An independent digital health prototype aligned with the NIH NOURISH: Autoimmunity Digital Health Challenge**
 
-[**Launch the live prototype**](https://ut1776.github.io/nourish-ssc/) · [**View source code**](https://github.com/ut1776/nourish-ssc) · [**View screenshots**](https://github.com/ut1776/nourish-ssc/tree/main/screenshots) · [**Official NIH challenge**](https://www.nih.gov/challenges/nourish-autoimmunity-digital-health-challenge)
+[**Launch the live prototype**](https://ut1776.github.io/nourish-ssc/) · [**Source repository**](https://github.com/ut1776/nourish-ssc) · [**Screenshots**](https://github.com/ut1776/nourish-ssc/tree/main/screenshots) · [**Official NIH challenge**](https://www.nih.gov/challenges/nourish-autoimmunity-digital-health-challenge)
 
 ---
 
-## 1. Why this project matters
+## 1. A milestone in autoimmune digital health innovation
 
-NOURISH-SSc explores a practical digital health problem: how people living with systemic sclerosis can organize nutrition-related difficulties, gastrointestinal symptoms, and follow-up concerns in a single workflow.
+NOURISH-SSc is an independently developed digital health prototype exploring how nutrition-related difficulties, gastrointestinal symptoms, and follow-up concerns can be organized in one workflow for people living with systemic sclerosis (SSc).
 
-Systemic sclerosis (SSc) is a complex autoimmune connective-tissue disease that can affect multiple organs. Gastrointestinal involvement may contribute to reflux, bloating, difficulty eating, reduced appetite, and other experiences that affect daily life and nutritional well-being.
+The project aligns with the public goals of the National Institutes of Health (NIH) **NOURISH: Autoimmunity Digital Health Challenge**, led by the NIH Office of Autoimmune Disease Research (OADR).
 
-People may find it difficult to remember symptom patterns, describe nutrition-related changes, and communicate outstanding concerns during a short clinical appointment. NOURISH-SSc is designed to help organize that information for review and discussion.
+The official challenge describes a three-phase federal prize competition with up to **$650,000 in total prizes**. The Phase 1 submission period is October 1, 2026, through January 8, 2027.
 
-### Connection to the NIH NOURISH challenge
+For an independent developer, building a working prototype for this challenge is an opportunity to address a meaningful problem in autoimmune digital health: making nutrition-related experiences and symptoms easier to review and discuss during clinical follow-up.
 
-The National Institutes of Health (NIH) Office of Autoimmune Disease Research (OADR) runs the **NOURISH: Autoimmunity Digital Health Challenge**, a three-phase federal prize competition focused on digital health approaches to nutrition and autoimmune disease.
+**Important:** This is an independent project. Mention of NIH and its challenge does not imply NIH sponsorship, selection, funding, approval, or endorsement.
 
-The official challenge describes a total prize pool of up to **$650,000**. The Phase 1 submission period is October 1, 2026, through January 8, 2027.
+Official source: [NIH — NOURISH: Autoimmunity Digital Health Challenge](https://www.nih.gov/challenges/nourish-autoimmunity-digital-health-challenge)
 
-This project is an independent prototype developed in alignment with the challenge's public goals. Participation in the competition does not imply selection, funding, an award, or endorsement by NIH or any federal agency.
+## 2. The problem
 
-Official information: https://www.nih.gov/challenges/nourish-autoimmunity-digital-health-challenge
+Systemic sclerosis is a complex autoimmune connective-tissue disease that can affect multiple organs. Gastrointestinal involvement may contribute to reflux, bloating, reduced appetite, difficulty eating, and other experiences that can affect daily functioning and nutritional well-being.
 
-## 2. The problem NOURISH-SSc addresses
+People may find it difficult to remember symptom patterns, describe nutrition-related changes, and keep track of questions that need follow-up during short clinical appointments.
 
-The prototype focuses on three connected needs:
+NOURISH-SSc explores a practical workflow connecting three needs:
 
-* **Nutrition-related experiences:** Record eating difficulties and relevant changes alongside symptoms.
-* **Symptom awareness:** Review descriptive patterns in recorded symptom ratings over time.
-* **Follow-up preparation:** Organize concerns and follow-up items to support conversations with healthcare professionals.
+* **Track:** Record symptoms, their impact, and nutrition-related experiences.
+* **Review:** Examine descriptive patterns across saved symptom entries.
+* **Prepare:** Organize recorded information and follow-up items for a healthcare conversation.
 
-The central idea is to connect symptom tracking with nutrition-related experiences and follow-up preparation, rather than treating a symptom diary as the entire patient experience.
+The prototype is designed to support self-monitoring and communication. It does not diagnose disease, prescribe diets, or establish that dietary changes caused changes in symptoms.
 
 ## 3. Working prototype
 
-**Try it:** https://ut1776.github.io/nourish-ssc/
+**Try the application:** https://ut1776.github.io/nourish-ssc/
 
-The current web prototype includes:
+The current prototype includes:
 
 * Symptom check-ins and saved entries.
 * Nutrition-related tracking.
 * Descriptive symptom averages and trends.
 * Follow-up items with status tracking.
-* A care summary that incorporates relevant recorded follow-ups.
+* A care summary incorporating relevant recorded follow-ups.
 * Copy and print options.
 * CSV export.
 * Browser-based local storage for demonstration continuity.
 
-The application is intended to support self-monitoring and communication. It does not diagnose disease, prescribe dietary interventions, predict disease progression, or replace professional assessment.
-
 ## 4. Screenshots of the actual application
 
-These screenshots document the current prototype. They are stored in the repository's [`screenshots`](https://github.com/ut1776/nourish-ssc/tree/main/screenshots) folder.
+The following screenshots are stored in the repository's [`screenshots`](https://github.com/ut1776/nourish-ssc/tree/main/screenshots) folder.
 
 ### 4.1 Symptom trends — Image 1576
 
-![NOURISH-SSc symptom trends screen](screenshots/1576.png)
+![NOURISH-SSc symptom trends screen](https://github.com/ut1776/nourish-ssc/raw/main/screenshots/1576.png)
+
+[Open the symptom trends image](https://github.com/ut1776/nourish-ssc/blob/main/screenshots/1576.png)
 
 The trends view helps users review descriptive patterns in their recorded symptom ratings. The output reflects the available entries; it is not a diagnostic result or a prediction.
 
 ### 4.2 Symptom check-in — Image 1577
 
-![NOURISH-SSc symptom check-in screen](screenshots/1577.png)
+![NOURISH-SSc symptom check-in screen](https://github.com/ut1776/nourish-ssc/raw/main/screenshots/1577.png)
+
+[Open the symptom check-in image](https://github.com/ut1776/nourish-ssc/blob/main/screenshots/1577.png)
 
 The check-in view provides a structured way to record symptoms and related experiences. These entries form the basis of the prototype's descriptive summaries.
 
 ### 4.3 Care summary — Image 1578
 
-![NOURISH-SSc care summary screen](screenshots/1578.png)
+![NOURISH-SSc care summary screen](https://github.com/ut1776/nourish-ssc/raw/main/screenshots/1578.png)
+
+[Open the care summary image](https://github.com/ut1776/nourish-ssc/blob/main/screenshots/1578.png)
 
 The care summary brings recorded information together to help users prepare for a clinical conversation. It is a communication aid, not a substitute for professional assessment.
 
 ### 4.4 Follow-up tracking — Image 1579
 
-![NOURISH-SSc follow-up tracking screen](screenshots/1579.png)
+![NOURISH-SSc follow-up tracking screen](https://github.com/ut1776/nourish-ssc/raw/main/screenshots/1579.png)
 
-The follow-up view helps users keep track of recorded concerns and their status, supporting continuity between symptom check-ins and clinical conversations.
+[Open the follow-up tracking image](https://github.com/ut1776/nourish-ssc/blob/main/screenshots/1579.png)
 
-### How the screens work together
+The follow-up view helps users keep track of recorded concerns and their status, supporting continuity between check-ins and clinical conversations.
+
+### How the workflow connects
 
 ```mermaid
 flowchart TD
-    A["Symptom check-in<br/>Image 1577"]
-    B["Nutrition-related experiences"]
-    C["Symptom trends<br/>Image 1576"]
-    D["Follow-up tracking<br/>Image 1579"]
-    E["Care summary<br/>Image 1578"]
-
-    A --> B
-    A --> C
-    A --> D
-    B --> E
+    A["Symptom check-in"] --> B["Nutrition-related experiences"]
+    A --> C["Descriptive symptom trends"]
+    A --> D["Follow-up tracking"]
+    B --> E["Care summary"]
     C --> E
     D --> E
 ```
 
-This diagram describes the intended prototype workflow. It is not evidence of clinical effectiveness or a validated clinical decision pathway.
+This diagram represents the intended prototype workflow, not a validated clinical decision pathway.
 
 ## 5. Scientific context: nutrition in systemic sclerosis
 
@@ -107,13 +107,13 @@ Published research provides a rationale for considering nutritional status and g
 
 One previously extracted study supplement reported 82 participants with systemic sclerosis divided into two categories using the Controlling Nutritional Status (CONUT) score.
 
-| Reported category | Participants | Percentage of this study sample |
-| ----------------- | -----------: | ------------------------------: |
-| CONUT score 0–1   |           47 |                           57.3% |
-| CONUT score ≥2    |           35 |                           42.7% |
-| **Total**         |       **82** |                        **100%** |
+| Reported category | Participants | Percentage of study sample |
+| ----------------- | -----------: | -------------------------: |
+| CONUT score 0–1   |           47 |                      57.3% |
+| CONUT score ≥2    |           35 |                      42.7% |
+| **Total**         |       **82** |                   **100%** |
 
-### Visual summary of the study sample
+### Visual summary
 
 ```mermaid
 xychart-beta
@@ -123,21 +123,17 @@ xychart-beta
     bar [47, 35]
 ```
 
-**Interpretation:** In this particular sample, 35 of 82 participants were in the reported CONUT ≥2 category. This is a result from one study, not an estimate of prevalence across all people with systemic sclerosis.
+**Interpretation:** In this particular study sample, 35 of 82 participants were in the reported CONUT ≥2 category. This is a single-study result, not an estimate of prevalence across all people with systemic sclerosis.
 
-**Source for verification:** Öz et al. (2025), *Rheumatology International*, 45(1), article 21. DOI: https://doi.org/10.1007/s00296-024-05783-2
+**Source to verify:** Öz et al. (2025), *Rheumatology International*, 45(1), article 21. [DOI: 10.1007/s00296-024-05783-2](https://doi.org/10.1007/s00296-024-05783-2).
 
-The category definitions and values should be checked against the original publication and its tables before formal submission. The study data are not data collected by NOURISH-SSc.
+Verify the category definitions and figures against the original article and tables before using them in the formal submission. These are published-study data, not data collected by NOURISH-SSc.
 
-### How the evidence informs the prototype
+The current prototype does not calculate CONUT, diagnose malnutrition, or infer an individual's nutritional status from these study findings.
 
-The published findings provide context for the importance of nutritional assessment in systemic sclerosis. NOURISH-SSc explores a different, more limited question: can a simple workflow help people organize nutrition-related experiences, symptom patterns, and questions for follow-up?
+## 6. What makes NOURISH-SSc distinctive?
 
-The current prototype does not calculate CONUT, diagnose malnutrition, infer an individual's nutritional status from research data, or determine whether a dietary change caused a symptom change.
-
-## 6. What makes the approach distinctive?
-
-NOURISH-SSc emphasizes the connection between nutrition-related difficulties and follow-up preparation.
+The prototype emphasizes the connection between nutrition-related difficulties and follow-up preparation.
 
 | User need                               | Prototype feature           | Current limitation                                  |
 | --------------------------------------- | --------------------------- | --------------------------------------------------- |
@@ -145,10 +141,10 @@ NOURISH-SSc emphasizes the connection between nutrition-related difficulties and
 | Review patterns over time               | Descriptive trends          | Does not establish causation                        |
 | Record nutrition-related changes        | Nutrition-related tracking  | Does not prescribe a diet                           |
 | Remember unresolved concerns            | Follow-up status tracking   | Does not send clinical alerts                       |
-| Prepare for a healthcare conversation   | Care summary                | Does not integrate with an electronic health record |
+| Prepare for clinical conversations      | Care summary                | Does not integrate with an electronic health record |
 | Review or transfer recorded information | Copy, print, and CSV export | Exported files require privacy precautions          |
 
-The potential value is the integration of these functions into one workflow. Whether this approach improves usability, communication, or health outcomes remains to be evaluated.
+The potential value is the integration of these activities into one workflow. Whether this approach improves usability, communication, or health outcomes remains to be evaluated.
 
 ## 7. Development status
 
@@ -166,24 +162,24 @@ The potential value is the integration of these functions into one workflow. Whe
 | Electronic health record integration | Not implemented  |
 | Secure clinical data infrastructure  | Not implemented  |
 
-Any patient or healthcare-professional feedback should be reported only after it has actually been collected. Future testing should assess usability, clarity, accessibility, and whether the workflow supports the intended communication tasks.
+Patient or healthcare-professional feedback should be reported only after it has actually been collected. Future testing should examine usability, clarity, accessibility, and whether the workflow supports the intended communication tasks.
 
 ## 8. Next steps
 
-1. **Verify the prototype.** Test check-ins, saved entries, trends, follow-up status, care-summary content, and exports.
-2. **Review the experience with intended users.** Where feasible, gather feedback from people with relevant lived experience and a healthcare professional, documenting what they reviewed and what changed.
-3. **Strengthen the evidence map.** Connect each proposed measure to a reliable source and distinguish established measures from exploratory fields.
-4. **Improve accessibility and privacy.** Review mobile usability, legibility, data handling, and safe use of exported information.
-5. **Prepare the competition submission.** Complete the narrative and a concise video demonstration showing the actual application and its limitations.
+1. **Verify functionality:** Test check-ins, saved entries, trends, follow-up status, care-summary content, copy/print, and CSV export.
+2. **Seek appropriate feedback:** Where feasible, ask people with relevant lived experience and a healthcare professional to review the workflow and document their actual feedback.
+3. **Strengthen the evidence map:** Link proposed measures to reliable sources and distinguish established measures from exploratory fields.
+4. **Review privacy and accessibility:** Test mobile presentation, legibility, touch interactions, and safe handling of exported information.
+5. **Prepare the submission:** Complete the narrative and a concise video demonstrating the actual application and its limitations.
 
 ## 9. Privacy, safety, and limitations
 
-The prototype currently uses browser-based local storage. This supports demonstration continuity but is **not secure medical-record storage**. Data may be accessible to other people using the same browser profile and may be lost if browser data is cleared.
+The prototype currently uses browser-based local storage. This supports demonstration continuity but is **not secure medical-record storage**. Data may be accessible to others using the same browser profile and may be lost if browser data is cleared.
 
 * Use fictional demonstration data.
 * Do not enter real patient identifiers or sensitive clinical information.
 * Treat exported CSV files and printed summaries as potentially sensitive.
-* Do not use the application for diagnosis, emergency decisions, or treatment changes.
+* Do not use the prototype for diagnosis, emergency decisions, or treatment changes.
 * No clinical efficacy, safety, or health-outcome benefit has been established.
 
 Any future real-world deployment would require a more complete privacy, security, accessibility, and governance plan.
@@ -192,9 +188,9 @@ Any future real-world deployment would require a more complete privacy, security
 
 The following publications provide background for the clinical problem and the relevance of gastrointestinal symptom measurement. Verify each article's title, population, methods, and specific findings against the original publication before attributing claims to it.
 
-1. Samm et al. (2024). *Journal of Scleroderma and Related Disorders*, 9(3), 216–222. DOI: https://doi.org/10.1177/23971983241264868
-2. Öz et al. (2025). *Rheumatology International*, 45(1), article 21. DOI: https://doi.org/10.1007/s00296-024-05783-2
-3. Khanna et al. (2009). *Arthritis & Rheumatism*, 61(9), 1257–1263. DOI: https://doi.org/10.1002/art.24730
+1. Samm et al. (2024). *Journal of Scleroderma and Related Disorders*, 9(3), 216–222. [DOI: 10.1177/23971983241264868](https://doi.org/10.1177/23971983241264868).
+2. Öz et al. (2025). *Rheumatology International*, 45(1), article 21. [DOI: 10.1007/s00296-024-05783-2](https://doi.org/10.1007/s00296-024-05783-2).
+3. Khanna et al. (2009). *Arthritis & Rheumatism*, 61(9), 1257–1263. [DOI: 10.1002/art.24730](https://doi.org/10.1002/art.24730).
 
 These references provide scientific context; their inclusion does not establish that the prototype is validated or that its use improves outcomes.
 
@@ -202,7 +198,7 @@ These references provide scientific context; their inclusion does not establish 
 
 AI tools may be used in developing competition submissions only in accordance with the official challenge rules and disclosure requirements.
 
-The final submission should accurately describe which development activities used AI assistance and identify the participant's own contributions to design, implementation, testing, and decision-making. Do not claim testing, user feedback, clinical validation, or outcomes that have not occurred.
+The final submission should accurately describe which development activities used AI assistance and identify the participant's own contributions to design, implementation, testing, and decision-making. Do not claim testing, feedback, clinical validation, or outcomes that have not occurred.
 
 ## About this project
 
@@ -217,4 +213,4 @@ NOURISH-SSc is an independent prototype exploring how nutrition-related experien
 
 ---
 
-**Phase 1 reminder:** Check the official challenge page for the current submission requirements, including the narrative page limit and formatting, registration, and prototype demonstration video requirements.
+**Phase 1 reminder:** Consult the [official challenge website](https://www.nih.gov/challenges/nourish-autoimmunity-digital-health-challenge) for current submission requirements, including the narrative, registration, formatting, and prototype demonstration video.
