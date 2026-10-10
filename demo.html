@@ -2,804 +2,699 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#102524">
-<title>NOURISH-SSc | Cinematic Prototype</title>
-<style>
-:root {
-  --bg:#102524;
-  --mint:#a7e2c3;
-  --coral:#ff9b83;
-  --gold:#f4d58a;
-  --cream:#f8f4e9;
-  --muted:#c7d5cc;
-}
-* { box-sizing:border-box; }
-html { background:var(--bg); scroll-behavior:smooth; }
-body {
-  margin:0;
-  min-height:100vh;
-  min-height:100svh;
-  color:var(--cream);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-}
-button { font:inherit; }
-.film {
-  min-height:100vh;
-  min-height:100svh;
-  position:relative;
-  overflow:hidden;
-  isolation:isolate;
-  background:
-    radial-gradient(ellipse at 80% 12%,#2d6251 0,transparent 38%),
-    radial-gradient(ellipse at 5% 90%,#6a3e3b 0,transparent 36%),
-    linear-gradient(135deg,#102524,#183a35 58%,#1c302c);
-}
-.orb {
-  position:absolute;
-  z-index:-1;
-  border-radius:50%;
-  pointer-events:none;
-  filter:blur(3px);
-  opacity:.35;
-  animation:drift 12s ease-in-out infinite alternate;
-}
-.orb.one {
-  width:260px;height:260px;
-  background:#6cc99a;
-  top:12%;right:-100px;
-}
-.orb.two {
-  width:200px;height:200px;
-  background:#f59a7e;
-  bottom:4%;left:-90px;
-  animation-delay:-5s;
-}
-.topbar {
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  padding:22px clamp(18px,5vw,64px);
-}
-.brand {
-  font-size:.9rem;
-  font-weight:850;
-  letter-spacing:.16em;
-}
-.brand span { color:var(--mint); }
-.tag {
-  font-size:.68rem;
-  letter-spacing:.12em;
-  text-transform:uppercase;
-  color:var(--muted);
-  border:1px solid #ffffff30;
-  border-radius:99px;
-  padding:8px 12px;
-}
-main {
-  width:min(1160px,100%);
-  margin:auto;
-  padding:clamp(12px,3vw,36px) clamp(18px,5vw,64px) 28px;
-}
-.kicker {
-  color:var(--mint);
-  font-size:.7rem;
-  font-weight:800;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  margin:0 0 18px;
-}
-.layout {
-  display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(270px,.9fr);
-  align-items:center;
-  gap:clamp(26px,5vw,72px);
-  min-height:clamp(420px,62vh,650px);
-}
-.copy { animation:rise .8s ease both; }
-h1 {
-  font-size:clamp(2.7rem,6.8vw,5.8rem);
-  line-height:.98;
-  letter-spacing:-.065em;
-  margin:0 0 24px;
-}
-h1 em {
-  color:var(--mint);
-  font-style:normal;
-}
-.lede {
-  font-size:clamp(1rem,1.7vw,1.25rem);
-  line-height:1.6;
-  color:#e0e9df;
-  margin:0 0 24px;
-  max-width:560px;
-}
-.note {
-  display:flex;
-  align-items:flex-start;
-  gap:10px;
-  color:var(--muted);
-  font-size:.86rem;
-  line-height:1.55;
-  max-width:530px;
-}
-.dot {
-  flex:0 0 8px;
-  height:8px;
-  margin-top:6px;
-  border-radius:50%;
-  background:var(--coral);
-  box-shadow:0 0 18px #ff9b83;
-}
-.art-wrap {
-  position:relative;
-  min-height:350px;
-  display:grid;
-  place-items:center;
-  animation:artIn 1s ease both;
-}
-.halo {
-  position:absolute;
-  width:min(90%,410px);
-  aspect-ratio:1;
-  border-radius:50%;
-  background:radial-gradient(circle,#b2e7c820 0 38%,#b2e7c80b 60%,transparent 70%);
-  border:1px solid #d9ffe41f;
-  animation:breathe 5s ease-in-out infinite;
-}
-.ring {
-  position:absolute;
-  width:min(78%,350px);
-  aspect-ratio:1;
-  border-radius:50%;
-  border:1px solid #d8ffe44a;
-  animation:spin 35s linear infinite;
-}
-.ring:before,.ring:after {
-  content:"";
-  position:absolute;
-  width:10px;height:10px;
-  border-radius:50%;
-  background:var(--gold);
-  box-shadow:0 0 22px #f4d58a99;
-}
-.ring:before { top:12%;left:20%; }
-.ring:after { bottom:15%;right:14%;background:var(--coral); }
-.plate {
-  position:relative;
-  width:min(74vw,330px);
-  max-width:100%;
-  aspect-ratio:1;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  background:
-    radial-gradient(circle at 35% 28%,
-    #fff9e9,#d9e8d8 52%,#91b8a3 74%,
-    #527b6c 76%,#d8e8d9 79%,#e9f0df 82%,#ffffff18 83%);
-  box-shadow:0 32px 80px #0005,inset 0 4px 18px #fff9;
-  animation:float 6s ease-in-out infinite;
-  transform:rotate(-7deg);
-}
-.food {
-  position:absolute;
-  font-size:clamp(2.2rem,5.7vw,4.4rem);
-  filter:drop-shadow(0 8px 5px #233d2b32);
-  animation:foodFloat 4.5s ease-in-out infinite;
-  user-select:none;
-}
-.food:nth-child(1) { top:18%;left:28%; }
-.food:nth-child(2) { top:27%;right:18%;animation-delay:-2s; }
-.food:nth-child(3) { top:49%;left:17%;animation-delay:-.7s; }
-.food:nth-child(4) { bottom:19%;left:32%;animation-delay:-3s; }
-.food:nth-child(5) { bottom:22%;right:19%;animation-delay:-1.7s; }
-.chip {
-  position:absolute;
-  z-index:2;
-  border:1px solid #ffffff32;
-  background:#193b35d9;
-  padding:11px 14px;
-  border-radius:15px;
-  font-size:.78rem;
-  color:var(--cream);
-  box-shadow:0 14px 35px #0002;
-  animation:float 5s ease-in-out infinite;
-}
-.chip strong {
-  display:block;
-  color:var(--mint);
-  font-size:.92rem;
-  margin-bottom:3px;
-}
-.chip.left { left:0;top:18%; }
-.chip.right { right:0;bottom:14%;animation-delay:-2s; }
-.below {
-  border-top:1px solid #ffffff24;
-  padding-top:20px;
-  display:grid;
-  grid-template-columns:minmax(0,1fr) auto;
-  gap:18px;
-  align-items:center;
-}
-.caption-label {
-  font-size:.67rem;
-  text-transform:uppercase;
-  letter-spacing:.16em;
-  color:var(--gold);
-  margin-bottom:8px;
-  font-weight:800;
-}
-.caption {
-  font-size:clamp(.94rem,1.5vw,1.1rem);
-  line-height:1.55;
-  color:#edf0e5;
-  max-width:720px;
-  min-height:50px;
-}
-.controls {
-  display:flex;
-  align-items:center;
-  justify-content:flex-end;
-  gap:8px;
-  flex-wrap:wrap;
-}
-button {
-  cursor:pointer;
-  color:var(--cream);
-  border:1px solid #ffffff36;
-  background:#ffffff0d;
-  border-radius:999px;
-  padding:12px 15px;
-  transition:transform .2s,background .2s;
-}
-button:hover { transform:translateY(-2px);background:#ffffff1b; }
-button:focus-visible { outline:3px solid var(--gold);outline-offset:3px; }
-button.primary {
-  background:var(--mint);
-  border-color:var(--mint);
-  color:#16362c;
-  font-weight:850;
-}
-button.primary:hover { background:#c1f1d5; }
-button:disabled { opacity:.4;cursor:not-allowed;transform:none; }
-.statusrow {
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
-  gap:12px;
-  margin-top:22px;
-  color:var(--muted);
-  font-size:.76rem;
-}
-.voice-status { display:flex;align-items:center;gap:7px; }
-.voice-light {
-  width:7px;height:7px;border-radius:50%;
-  background:var(--gold);
-}
-.progress {
-  height:4px;
-  background:#ffffff1e;
-  border-radius:20px;
-  overflow:hidden;
-  margin-top:11px;
-}
-.progress span {
-  display:block;
-  height:100%;
-  width:0;
-  background:linear-gradient(90deg,var(--mint),var(--gold),var(--coral));
-  transition:width .3s;
-}
-.footer {
-  text-align:center;
-  color:#aabeb3;
-  font-size:.7rem;
-  line-height:1.65;
-  padding:16px 18px 28px;
-}
-.footer b { color:#dfeadf; }
-.scene-enter .copy { animation:rise .65s both; }
-.scene-enter .art-wrap { animation:artIn .85s both; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10152B">
+  <title>NOURISH-SSc | Interactive Prototype</title>
 
-@keyframes rise {
-  from { opacity:0;transform:translateY(24px); }
-  to { opacity:1;transform:translateY(0); }
-}
-@keyframes artIn {
-  from { opacity:0;transform:translateX(20px) scale(.94); }
-  to { opacity:1;transform:translateX(0) scale(1); }
-}
-@keyframes float {
-  0%,100% { translate:0 0; }
-  50% { translate:0 -12px; }
-}
-@keyframes foodFloat {
-  0%,100% { translate:0 0;rotate:-5deg;scale:1; }
-  50% { translate:0 -8px;rotate:5deg;scale:1.04; }
-}
-@keyframes drift {
-  from { transform:translate(0,0) scale(1); }
-  to { transform:translate(-25px,35px) scale(1.12); }
-}
-@keyframes breathe {
-  0%,100% { transform:scale(.96);opacity:.7; }
-  50% { transform:scale(1.04);opacity:1; }
-}
-@keyframes spin { to { transform:rotate(360deg); } }
+  <style>
+    :root {
+      --bg: #10152b;
+      --panel: #1a2340;
+      --panel-light: #243151;
+      --mint: #83f0cc;
+      --blue: #9bbdff;
+      --text: #f7f8ff;
+      --muted: #bdc7df;
+      --border: rgba(255,255,255,.13);
+    }
 
-@media(max-width:760px) {
-  .topbar { padding-top:16px; }
-  .layout { grid-template-columns:1fr;gap:0;min-height:0; }
-  .copy { padding-top:18px; }
-  .art-wrap { min-height:300px;grid-row:2; }
-  .plate { width:min(68vw,280px); }
-  .chip.left { left:3%;top:12%; }
-  .chip.right { right:2%;bottom:9%; }
-  .below { grid-template-columns:1fr; }
-  .controls { justify-content:flex-start; }
-  h1 { font-size:clamp(2.6rem,13vw,4.4rem); }
-}
-@media(prefers-reduced-motion:reduce) {
-  *,*::before,*::after {
-    animation-duration:.01ms!important;
-    animation-iteration-count:1!important;
-    scroll-behavior:auto!important;
-    transition:none!important;
-  }
-}
-</style>
+    * { box-sizing: border-box; }
+
+    html { min-height: 100%; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 8% 8%, #30416c 0, transparent 38%),
+        radial-gradient(ellipse at 95% 85%, #1a4949 0, transparent 36%),
+        var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button { font: inherit; }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 18px clamp(16px, 5vw, 64px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-size: 16px;
+      font-weight: 850;
+      letter-spacing: 2px;
+    }
+
+    .logo span { color: var(--mint); }
+
+    .status-pill {
+      padding: 7px 10px;
+      border: 1px solid #83f0cc66;
+      border-radius: 999px;
+      color: var(--mint);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .wrap {
+      width: min(100% - 32px, 1040px);
+      margin: 0 auto;
+      padding: 32px 0 42px;
+    }
+
+    .eyebrow {
+      color: var(--mint);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2.4px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 15px 0;
+      font-size: clamp(36px, 7vw, 66px);
+      line-height: 1.03;
+      letter-spacing: -2px;
+    }
+
+    .accent { color: var(--mint); }
+
+    .lead {
+      max-width: 690px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .stage {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      min-height: 390px;
+      margin-top: 28px;
+      padding: clamp(22px, 5vw, 48px);
+      border: 1px solid var(--border);
+      border-radius: 27px;
+      background: linear-gradient(145deg, #1c2746f5, #111a30f5);
+      box-shadow: 0 25px 80px #0004;
+    }
+
+    .stage::before,
+    .stage::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(3px);
+      animation: glow 7s ease-in-out infinite alternate;
+    }
+
+    .stage::before {
+      top: -90px;
+      right: -50px;
+      background: #83f0cc22;
+    }
+
+    .stage::after {
+      bottom: -125px;
+      left: 30%;
+      background: #9bbdff18;
+      animation-delay: -3s;
+    }
+
+    @keyframes glow {
+      from { transform: scale(.8); opacity: .5; }
+      to { transform: scale(1.35); opacity: 1; }
+    }
+
+    .scene {
+      animation: sceneIn .45s ease both;
+    }
+
+    @keyframes sceneIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .scene-kicker {
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .scene h2 {
+      max-width: 760px;
+      margin: 15px 0 12px;
+      font-size: clamp(27px, 4.6vw, 43px);
+      line-height: 1.13;
+      letter-spacing: -1px;
+    }
+
+    .scene-description {
+      max-width: 740px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.85;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 13px;
+      margin-top: 25px;
+    }
+
+    .feature-card {
+      min-width: 0;
+      padding: 18px 15px;
+      border: 1px solid var(--border);
+      border-radius: 19px;
+      background: #ffffff08;
+      animation: floatIn .55s ease both;
+    }
+
+    .feature-card:nth-child(2) { animation-delay: .08s; }
+    .feature-card:nth-child(3) { animation-delay: .16s; }
+
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .feature-icon {
+      display: block;
+      margin-bottom: 13px;
+      font-size: 29px;
+    }
+
+    .feature-title {
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1.4;
+    }
+
+    .feature-copy {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+      overflow-wrap: anywhere;
+    }
+
+    .callout {
+      margin-top: 20px;
+      padding: 15px 17px;
+      border-left: 3px solid var(--mint);
+      border-radius: 0 12px 12px 0;
+      background: #83f0cc0b;
+      color: #e6f8f2;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 30px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .progress-track {
+      height: 5px;
+      margin-top: 9px;
+      overflow: hidden;
+      border-radius: 20px;
+      background: #ffffff18;
+    }
+
+    #progress {
+      width: 14.285%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--mint), var(--blue));
+      transition: width .35s ease;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 17px;
+    }
+
+    .btn {
+      min-height: 47px;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      color: var(--text);
+      background: #ffffff0b;
+      font-size: 13px;
+      font-weight: 750;
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .btn.primary {
+      border-color: var(--mint);
+      background: var(--mint);
+      color: #10251f;
+    }
+
+    .btn:active { transform: scale(.98); }
+
+    .btn:focus-visible {
+      outline: 3px solid var(--blue);
+      outline-offset: 3px;
+    }
+
+    .live-status {
+      min-height: 23px;
+      margin-top: 13px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .disclaimer {
+      margin-top: 24px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      color: var(--muted);
+      background: #ffffff06;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .disclaimer strong { color: var(--mint); }
+
+    footer {
+      padding: 23px 15px 30px;
+      border-top: 1px solid var(--border);
+      color: #9daac6;
+      text-align: center;
+      font-size: 11px;
+      line-height: 1.8;
+    }
+
+    @media (max-width: 620px) {
+      .wrap { padding-top: 25px; }
+      .cards { grid-template-columns: 1fr; }
+      .feature-card {
+        display: grid;
+        grid-template-columns: 43px minmax(0, 1fr);
+        column-gap: 10px;
+        align-items: start;
+        padding: 14px;
+      }
+      .feature-icon {
+        grid-row: span 2;
+        margin: 0;
+      }
+      .feature-copy { margin-top: 3px; }
+      .stage { min-height: 470px; }
+      .btn { flex: 1 1 auto; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
 </head>
-<body>
-<div class="film">
-  <div class="orb one"></div>
-  <div class="orb two"></div>
 
+<body>
   <header class="topbar">
-    <div class="brand">NOURISH<span>·</span>SSc</div>
-    <div class="tag">Phase 1 · Prototype film</div>
+    <div class="logo">NOURISH<span>•</span>SSc</div>
+    <div class="status-pill">PHASE 1 · PROTOTYPE</div>
   </header>
 
-  <main>
-    <div class="kicker" id="kicker">Nutrition support · Follow-up preparation</div>
+  <main class="wrap">
+    <div class="eyebrow">Nutrition · Symptoms · Follow-up</div>
 
-    <section class="layout" id="layout" aria-live="polite">
-      <div class="copy">
-        <p class="kicker" id="eyebrow">01 / THE EVERYDAY REALITY</p>
-        <h1 id="title">When food becomes <em>complicated.</em></h1>
-        <p class="lede" id="lede"></p>
-        <div class="note">
-          <span class="dot"></span>
-          <span id="note"></span>
-        </div>
+    <h1>
+      Make difficult days<br>
+      <span class="accent">easier to explain.</span>
+    </h1>
+
+    <p class="lead">
+      A human-centered digital health concept for people living with
+      systemic sclerosis. Record nutrition challenges, review personal
+      entries, and prepare more focused questions for care conversations.
+    </p>
+
+    <section class="stage" aria-label="Interactive prototype presentation">
+      <div id="scene-content">
+        <!-- Default content remains visible if JavaScript does not run. -->
+        <article class="scene">
+          <div class="scene-kicker">SCENE 01 OF 07</div>
+          <h2>Your experience is more than a symptom.</h2>
+          <p class="scene-description">
+            Nutrition challenges can overlap with symptoms, everyday
+            routines, and questions about follow-up. A useful record
+            starts with the person's own experience.
+          </p>
+          <div class="cards">
+            <div class="feature-card">
+              <span class="feature-icon">🥣</span>
+              <div class="feature-title">Nutrition</div>
+              <div class="feature-copy">What felt difficult today?</div>
+            </div>
+            <div class="feature-card">
+              <span class="feature-icon">📝</span>
+              <div class="feature-title">Daily check-in</div>
+              <div class="feature-copy">Capture it in your own words.</div>
+            </div>
+            <div class="feature-card">
+              <span class="feature-icon">🤝</span>
+              <div class="feature-title">Follow-up</div>
+              <div class="feature-copy">Prepare questions to discuss.</div>
+            </div>
+          </div>
+        </article>
       </div>
 
-      <div class="art-wrap" aria-label="Animated food illustration">
-        <div class="halo"></div>
-        <div class="ring"></div>
-        <div class="plate" id="plate" aria-hidden="true">
-          <span class="food">🥑</span>
-          <span class="food">🍓</span>
-          <span class="food">🥕</span>
-          <span class="food">🥦</span>
-          <span class="food">🍋</span>
-        </div>
-        <div class="chip left" id="chip1">
-          <strong>Real life</strong>Different every day
-        </div>
-        <div class="chip right" id="chip2">
-          <strong>Small signals</strong>Worth noticing
-        </div>
+      <div class="progress-meta">
+        <span id="scene-label">SCENE 1 OF 7</span>
+        <span id="progress-label">14% complete</span>
+      </div>
+      <div
+        class="progress-track"
+        role="progressbar"
+        aria-label="Presentation progress"
+        aria-valuemin="1"
+        aria-valuemax="7"
+        aria-valuenow="1"
+        id="progress-track"
+      >
+        <div id="progress"></div>
       </div>
     </section>
 
-    <section class="below">
-      <div>
-        <div class="caption-label">On-screen narration</div>
-        <div class="caption" id="caption"></div>
-      </div>
-      <div class="controls">
-        <button id="back" type="button">← Back</button>
-        <button id="play" class="primary" type="button">▶ Play with voice</button>
-        <button id="next" type="button">Next →</button>
-      </div>
-    </section>
+    <div class="controls">
+      <button class="btn" id="back" type="button">← Back</button>
+      <button class="btn primary" id="play" type="button">
+        ▶ Play narration
+      </button>
+      <button class="btn" id="next" type="button">Next →</button>
+      <button class="btn" id="replay" type="button">↻ Replay scene</button>
+    </div>
 
-    <div class="statusrow">
-      <span id="sceneLabel">Scene 1 of 7 · 0:00 / 3:00</span>
-      <span class="voice-status">
-        <span class="voice-light" id="voiceLight"></span>
-        <span id="voiceStatus" role="status">Tap Play to start narration</span>
-      </span>
+    <div class="live-status" id="status" role="status" aria-live="polite">
+      Ready · Scene 1 of 7 · Use Next to explore the presentation.
     </div>
-    <div class="progress" aria-label="Presentation progress">
-      <span id="progressFill"></span>
-    </div>
+
+    <aside class="disclaimer">
+      <strong>Prototype, not a clinical product.</strong>
+      This demonstration uses illustrative content. It does not diagnose
+      disease, predict progression, recommend treatment, or provide
+      clinical monitoring. It has not been clinically validated.
+      No clinician is monitoring this demo.
+    </aside>
   </main>
 
-  <footer class="footer">
-    <b>Concept prototype · Fictional scenario</b><br>
-    Not a diagnostic tool, medical advice, or a clinically validated system.
-    No clinician monitoring is implied.
+  <footer>
+    NOURISH-SSc · Human-centered digital health concept<br>
+    Demonstration only · Fictional illustrative content
   </footer>
-</div>
 
-<script>
-"use strict";
+  <script>
+  (function () {
+    "use strict";
 
-(() => {
-  const scenes = [
-    {
-      eyebrow:"01 / THE EVERYDAY REALITY",
-      title:"When food becomes <em>complicated.</em>",
-      lede:"Living with systemic sclerosis can make eating and getting enough nourishment harder than it looks from the outside.",
-      note:"A person's day can be shaped by symptoms, appetite, energy, and uncertainty.",
-      caption:"Nutrition challenges are not always obvious. A symptom that changes from day to day can be difficult to explain in a short appointment.",
-      foods:["🥑","🍓","🥕","🥦","🍋"],
-      chip1:["Real life","Different every day"],
-      chip2:["Small signals","Worth noticing"],
-      voice:"Living with systemic sclerosis can make eating and getting enough nourishment harder than it looks from the outside. Nutrition challenges are not always obvious. Symptoms can change from day to day, and that can be difficult to explain during a short appointment.",
-      duration:26
-    },
-    {
-      eyebrow:"02 / THE MISSING THREAD",
-      title:"The details are there. <em>Scattered.</em>",
-      lede:"A difficult meal, a reflux episode, a low-energy day, a question that never made it into the appointment.",
-      note:"When details live in memory, notes, and separate apps, patterns can be hard to describe.",
-      caption:"People may remember the worst day, forget small details, or struggle to describe what made eating easier or harder.",
-      foods:["🥣","🫚","🍌","🥛","🫐"],
-      chip1:["Symptoms","Hard to summarize"],
-      chip2:["Questions","Easy to forget"],
-      voice:"A difficult meal, a reflux episode, a low energy day, a question that never made it into the appointment. When details live in memory, notes, and separate apps, patterns can be hard to describe. This prototype explores a more organized place to collect those details.",
-      duration:26
-    },
-    {
-      eyebrow:"03 / A GENTLER CHECK-IN",
-      title:"Start with what <em>today feels like.</em>",
-      lede:"A short check-in can help someone record symptoms, eating difficulties, and what support they may need.",
-      note:"The goal is reflection and preparation—not a score, diagnosis, or prediction.",
-      caption:"A simple, repeatable check-in can turn a vague feeling into a clearer note the person can review later.",
-      foods:["📝","🍵","🍐","🥑","🍇"],
-      chip1:["Check in","At your own pace"],
-      chip2:["No score","No diagnosis"],
-      voice:"The experience starts with a gentle check in. Someone can record how they are feeling, what made eating difficult, and what they want to remember. The goal is reflection and preparation, not a score, diagnosis, or prediction.",
-      duration:26
-    },
-    {
-      eyebrow:"04 / NOTICE THE CONTEXT",
-      title:"Make room for the <em>whole picture.</em>",
-      lede:"Symptoms, meals, hydration, appetite, and daily life may all matter to the conversation.",
-      note:"A log can show what was recorded; it cannot prove what caused a symptom.",
-      caption:"Trends are presented as personal observations, not clinical conclusions. Correlation is not proof of cause.",
-      foods:["📈","🥗","💧","🍊","🌿"],
-      chip1:["Your notes","Over time"],
-      chip2:["Context matters","No causal claims"],
-      voice:"Over time, a person may want to review their own notes. The prototype can help organize what was recorded, while avoiding claims that a food caused a symptom or that a trend has clinical meaning. Context matters, and observations are not proof of cause.",
-      duration:26
-    },
-    {
-      eyebrow:"05 / PREPARE FOR FOLLOW-UP",
-      title:"Turn notes into <em>better questions.</em>",
-      lede:"A care summary can help someone bring the details they want to discuss into a follow-up visit.",
-      note:"The person stays in control of what they review, share, or bring to an appointment.",
-      caption:"The summary is a conversation aid. It does not send alerts to clinicians or replace professional assessment.",
-      foods:["📋","💬","🩺","🗓️","✍️"],
-      chip1:["Your priorities","Your questions"],
-      chip2:["You decide","What to share"],
-      voice:"The next step is follow up preparation. A care summary can help someone bring their own observations and questions to an appointment. It is a conversation aid. It does not automatically alert a clinician, and it does not replace professional assessment.",
-      duration:26
-    },
-    {
-      eyebrow:"06 / BUILT TO BE TESTED",
-      title:"Useful means <em>usable by real people.</em>",
-      lede:"The next stage is to learn whether the flow is understandable, relevant, accessible, and practical.",
-      note:"Feedback and usability testing must come before claims of benefit or clinical validation.",
-      caption:"The prototype is an early concept. Its value must be evaluated; it has not been clinically validated.",
-      foods:["🧪","🤝","💡","📱","🌱"],
-      chip1:["Prototype","Early stage"],
-      chip2:["Next step","Usability testing"],
-      voice:"A promising idea is not the same as a proven tool. The next stage is to test whether the flow is understandable, accessible, and useful to the people it is intended to support. Any benefits must be evaluated rather than assumed.",
-      duration:25
-    },
-    {
-      eyebrow:"07 / THE VISION",
-      title:"More prepared. More <em>heard.</em>",
-      lede:"NOURISH-SSc explores a clearer path from everyday nutrition difficulties to a more organized care conversation.",
-      note:"A practical support concept—designed to help people prepare, not to make clinical decisions.",
-      caption:"NOURISH-SSc · Nutrition support and follow-up preparation. Concept prototype; fictional data only.",
-      foods:["🌿","🍓","🥑","💚","✨"],
-      chip1:["NOURISH-SSc","Listen · organize"],
-      chip2:["Next chapter","Test and learn"],
-      voice:"NOURISH S S C explores a clearer path from everyday nutrition difficulties to a more organized care conversation. A practical support concept designed to help people prepare, not to make clinical decisions. This is the beginning: test, learn, and improve with care.",
-      duration:25
+    var scenes = [
+      {
+        title: "Your experience is more than a symptom.",
+        text: "Nutrition challenges can overlap with symptoms, everyday routines, and questions about follow-up. A useful record starts with the person's own experience.",
+        cards: [
+          ["🥣", "Nutrition", "What felt difficult today?"],
+          ["📝", "Daily check-in", "Capture it in your own words."],
+          ["🤝", "Follow-up", "Prepare questions to discuss."]
+        ],
+        note: "Start with what matters to the person.",
+        narration: "Welcome to Nourish S S C. This concept starts with a simple idea: make nutrition difficulties easier to record and easier to discuss."
+      },
+      {
+        title: "Small difficulties deserve to be recorded.",
+        text: "A short check-in can capture eating challenges, appetite, digestive discomfort, or other concerns in the person's own words.",
+        cards: [
+          ["🍽️", "Eating", "Describe the challenge."],
+          ["💬", "Symptoms", "Record what you noticed."],
+          ["📅", "Context", "Add a date and notes."]
+        ],
+        note: "People can describe their own experience without being forced into a predefined explanation.",
+        narration: "The check-in gives people a place to record what happened, what felt difficult, and what they want to remember."
+      },
+      {
+        title: "A record should fit real life.",
+        text: "Short entries and optional notes can make documenting difficult days more manageable than writing a long diary.",
+        cards: [
+          ["✍️", "Simple entry", "Use your own words."],
+          ["⏱️", "Your pace", "Add information when ready."],
+          ["🔒", "Privacy first", "Use fictional data in this demo."]
+        ],
+        note: "The intended design principle is low effort, with user control over what they record.",
+        narration: "The goal is to make recording manageable. This demonstration uses illustrative content and is not connected to a clinical record."
+      },
+      {
+        title: "Look back at what you recorded.",
+        text: "A timeline could help users review their own entries and prepare observations. A pattern in a log is not proof of cause or a medical finding.",
+        cards: [
+          ["📈", "Your entries", "Review recorded information."],
+          ["🔎", "Your observations", "Notice what to ask about."],
+          ["🧭", "Stay grounded", "No automated diagnosis."]
+        ],
+        note: "Personal records can support a conversation, but they do not establish a medical explanation.",
+        narration: "Looking back may help someone explain what they have experienced. The prototype does not infer a diagnosis or determine the cause of symptoms."
+      },
+      {
+        title: "Turn concerns into questions.",
+        text: "A care summary could organize selected entries into discussion points for an appointment or another appropriate follow-up conversation.",
+        cards: [
+          ["📋", "Summary", "Organize your notes."],
+          ["❓", "Questions", "What should I ask my care team?"],
+          ["🤝", "Conversation", "Discuss next steps together."]
+        ],
+        note: "The person remains in control of the information they choose to share.",
+        narration: "Instead of trying to remember everything during an appointment, a person can prepare a summary and questions to discuss with their healthcare professional."
+      },
+      {
+        title: "Designed around people and care.",
+        text: "The concept aims to connect daily experience with better-prepared conversations, while leaving clinical decisions to qualified professionals.",
+        cards: [
+          ["🧑", "Patient perspective", "What matters day to day?"],
+          ["🩺", "Care perspective", "What needs clarification?"],
+          ["🔄", "Shared discussion", "Agree on appropriate follow-up."]
+        ],
+        note: "This is a communication-support concept, not a replacement for care.",
+        narration: "The intended value is better preparation and communication, not replacing a healthcare professional or claiming that a clinician is monitoring the app."
+      },
+      {
+        title: "A concept to test with real feedback.",
+        text: "The next step is usability feedback from people with relevant lived experience and healthcare professionals, followed by careful refinement and evaluation.",
+        cards: [
+          ["🗣️", "Gather feedback", "Is it understandable?"],
+          ["🛠️", "Improve usability", "Remove unnecessary effort."],
+          ["📊", "Evaluate", "Test before making claims."]
+        ],
+        note: "Usability, accessibility, safety, and impact must be evaluated before clinical benefit can be claimed.",
+        narration: "Nourish S S C is a prototype concept. Its usefulness, accessibility, safety, and impact must be evaluated before any clinical benefit can be claimed. Thank you."
+      }
+    ];
+
+    var current = 0;
+    var speaking = false;
+
+    var content = document.getElementById("scene-content");
+    var progress = document.getElementById("progress");
+    var progressTrack = document.getElementById("progress-track");
+    var sceneLabel = document.getElementById("scene-label");
+    var progressLabel = document.getElementById("progress-label");
+    var status = document.getElementById("status");
+    var playButton = document.getElementById("play");
+
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>"']/g, function (character) {
+        var map = {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;"
+        };
+        return map[character];
+      });
     }
-  ];
 
-  const totalDuration = scenes.reduce((sum, scene) => sum + scene.duration, 0);
-  const $ = id => document.getElementById(id);
+    function render() {
+      var scene = scenes[current];
 
-  const el = {
-    eyebrow:$("eyebrow"),
-    title:$("title"),
-    lede:$("lede"),
-    note:$("note"),
-    caption:$("caption"),
-    plate:$("plate"),
-    chip1:$("chip1"),
-    chip2:$("chip2"),
-    sceneLabel:$("sceneLabel"),
-    progress:$("progressFill"),
-    voiceStatus:$("voiceStatus"),
-    voiceLight:$("voiceLight"),
-    play:$("play"),
-    back:$("back"),
-    next:$("next"),
-    layout:$("layout")
-  };
+      var cardHTML = scene.cards.map(function (card) {
+        return (
+          '<div class="feature-card">' +
+            '<span class="feature-icon">' +
+              escapeHTML(card[0]) +
+            '</span>' +
+            '<div class="feature-title">' +
+              escapeHTML(card[1]) +
+            '</div>' +
+            '<div class="feature-copy">' +
+              escapeHTML(card[2]) +
+            '</div>' +
+          '</div>'
+        );
+      }).join("");
 
-  let index = 0;
-  let playing = false;
-  let timer = null;
-  let startedAt = 0;
-  let elapsedBeforePause = 0;
-  let generation = 0;
-  let voiceList = [];
+      content.innerHTML =
+        '<article class="scene">' +
+          '<div class="scene-kicker">SCENE ' +
+            String(current + 1).padStart(2, "0") +
+            ' OF ' + String(scenes.length).padStart(2, "0") +
+          '</div>' +
+          '<h2>' + escapeHTML(scene.title) + '</h2>' +
+          '<p class="scene-description">' +
+            escapeHTML(scene.text) +
+          '</p>' +
+          '<div class="cards">' + cardHTML + '</div>' +
+          '<div class="callout">' +
+            escapeHTML(scene.note) +
+          '</div>' +
+        '</article>';
 
-  function formatTime(seconds) {
-    seconds = Math.max(0, Math.floor(seconds));
-    return Math.floor(seconds / 60) + ":" +
-      String(seconds % 60).padStart(2, "0");
-  }
+      var percentage = Math.round(
+        ((current + 1) / scenes.length) * 100
+      );
 
-  function elapsed() {
-    return elapsedBeforePause +
-      (playing ? (Date.now() - startedAt) / 1000 : 0);
-  }
-
-  function getSceneStart(i) {
-    return scenes.slice(0, i).reduce((sum, scene) => sum + scene.duration, 0);
-  }
-
-  function loadVoices() {
-    if ("speechSynthesis" in window) {
-      voiceList = window.speechSynthesis.getVoices() || [];
+      progress.style.width = percentage + "%";
+      sceneLabel.textContent =
+        "SCENE " + (current + 1) + " OF " + scenes.length;
+      progressLabel.textContent = percentage + "% complete";
+      progressTrack.setAttribute("aria-valuenow", current + 1);
     }
-  }
 
-  if ("speechSynthesis" in window) {
-    loadVoices();
-    window.speechSynthesis.onvoiceschanged = loadVoices;
-  }
+    function stopSpeech() {
+      if ("speechSynthesis" in window) {
+        window.speechSynthesis.cancel();
+      }
+      speaking = false;
+      playButton.textContent = "▶ Play narration";
+    }
 
-  function render() {
-    const scene = scenes[index];
+    function speakCurrentScene() {
+      if (!("speechSynthesis" in window) ||
+          typeof window.SpeechSynthesisUtterance === "undefined") {
+        speaking = false;
+        playButton.textContent = "▶ Play narration";
+        status.textContent =
+          "Voice is unavailable in this browser. The presentation still works; read the text on screen.";
+        return;
+      }
 
-    el.eyebrow.textContent = scene.eyebrow;
-    el.title.innerHTML = scene.title;
-    el.lede.textContent = scene.lede;
-    el.note.textContent = scene.note;
-    el.caption.textContent = scene.caption;
+      window.speechSynthesis.cancel();
 
-    el.plate.querySelectorAll(".food").forEach((food, i) => {
-      food.textContent = scene.foods[i] || "✨";
+      var utterance = new window.SpeechSynthesisUtterance(
+        scenes[current].narration
+      );
+
+      utterance.lang = "en-US";
+      utterance.rate = 0.94;
+      utterance.pitch = 0.95;
+      utterance.volume = 1;
+
+      utterance.onend = function () {
+        if (speaking) {
+          status.textContent =
+            "Narration finished · Scene " +
+            (current + 1) + " of " + scenes.length;
+        }
+      };
+
+      utterance.onerror = function () {
+        status.textContent =
+          "Voice playback failed. You can continue using the visual presentation.";
+      };
+
+      try {
+        window.speechSynthesis.speak(utterance);
+        status.textContent =
+          "Narration requested · Scene " +
+          (current + 1) + " of " + scenes.length;
+      } catch (error) {
+        status.textContent =
+          "Voice could not start. Use Next to continue the presentation.";
+      }
+    }
+
+    function goToScene(index) {
+      current = (index + scenes.length) % scenes.length;
+      render();
+
+      if (speaking) {
+        speakCurrentScene();
+      } else {
+        status.textContent =
+          "Ready · Scene " + (current + 1) +
+          " of " + scenes.length;
+      }
+    }
+
+    document.getElementById("back").addEventListener("click", function () {
+      goToScene(current - 1);
     });
 
-    el.chip1.innerHTML =
-      "<strong>" + scene.chip1[0] + "</strong>" + scene.chip1[1];
-    el.chip2.innerHTML =
-      "<strong>" + scene.chip2[0] + "</strong>" + scene.chip2[1];
+    document.getElementById("next").addEventListener("click", function () {
+      goToScene(current + 1);
+    });
 
-    const currentTime = playing ? elapsed() : elapsedBeforePause;
-    el.sceneLabel.textContent =
-      "Scene " + (index + 1) + " of " + scenes.length +
-      " · " + formatTime(currentTime) + " / " + formatTime(totalDuration);
-
-    el.progress.style.width =
-      Math.min(100, currentTime / totalDuration * 100) + "%";
-
-    el.back.disabled = index === 0;
-    el.next.textContent = index === scenes.length - 1 ? "Replay ↻" : "Next →";
-
-    el.layout.classList.remove("scene-enter");
-    void el.layout.offsetWidth;
-    el.layout.classList.add("scene-enter");
-  }
-
-  function stopSpeech() {
-    generation++;
-    if ("speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-    }
-  }
-
-  function speakScene() {
-    stopSpeech();
-
-    if (!("speechSynthesis" in window)) {
-      el.voiceStatus.textContent =
-        "Voice is unavailable in this browser. Captions still work.";
-      return;
-    }
-
-    const thisGeneration = generation;
-    const scene = scenes[index];
-    const utterance = new SpeechSynthesisUtterance(scene.voice);
-
-    utterance.lang = "en-US";
-    utterance.rate = 0.94;
-    utterance.pitch = 1;
-    utterance.volume = 1;
-
-    loadVoices();
-
-    const englishVoice =
-      voiceList.find(v =>
-        /^en[-_]/i.test(v.lang) && /natural|premium|enhanced/i.test(v.name)
-      ) ||
-      voiceList.find(v => /^en[-_]/i.test(v.lang));
-
-    if (englishVoice) utterance.voice = englishVoice;
-
-    utterance.onstart = () => {
-      if (thisGeneration !== generation) return;
-      el.voiceStatus.textContent = "Narration playing";
-      el.voiceLight.style.background = "var(--mint)";
-    };
-
-    utterance.onend = () => {
-      if (thisGeneration !== generation) return;
-      el.voiceStatus.textContent = playing ?
-        "Scene narration finished" : "Paused";
-      el.voiceLight.style.background = "var(--gold)";
-    };
-
-    utterance.onerror = event => {
-      if (thisGeneration !== generation) return;
-      if (event.error !== "canceled" && event.error !== "interrupted") {
-        el.voiceStatus.textContent =
-          "Voice could not start. Tap Play again; captions remain available.";
-        el.voiceLight.style.background = "var(--coral)";
+    playButton.addEventListener("click", function () {
+      if (speaking) {
+        stopSpeech();
+        status.textContent =
+          "Narration stopped · Scene " +
+          (current + 1) + " of " + scenes.length;
+      } else {
+        speaking = true;
+        playButton.textContent = "Ⅱ Stop narration";
+        speakCurrentScene();
       }
-    };
+    });
 
-    // Speak directly after the Play button gesture for iOS Safari.
-    window.speechSynthesis.speak(utterance);
-  }
+    document.getElementById("replay").addEventListener("click", function () {
+      speaking = true;
+      playButton.textContent = "Ⅱ Stop narration";
+      speakCurrentScene();
+    });
 
-  function finish() {
-    playing = false;
-    clearTimeout(timer);
-    timer = null;
-    elapsedBeforePause = totalDuration;
-    stopSpeech();
-    index = scenes.length - 1;
+    // Render the first scene immediately.
     render();
-    el.play.textContent = "↻ Replay with voice";
-    el.voiceStatus.textContent = "Presentation complete";
-    el.voiceLight.style.background = "var(--mint)";
-    el.progress.style.width = "100%";
-  }
 
-  function tick() {
-    if (!playing) return;
+    status.textContent =
+      "Ready · Scene 1 of " + scenes.length +
+      " · Tap Next to test the presentation.";
 
-    const currentTime = elapsed();
-
-    if (currentTime >= totalDuration) {
-      finish();
-      return;
-    }
-
-    let cumulative = 0;
-    let nextIndex = scenes.length - 1;
-
-    for (let i = 0; i < scenes.length; i++) {
-      cumulative += scenes[i].duration;
-      if (currentTime < cumulative) {
-        nextIndex = i;
-        break;
-      }
-    }
-
-    if (nextIndex !== index) {
-      index = nextIndex;
-      render();
-      speakScene();
-    }
-
-    el.sceneLabel.textContent =
-      "Scene " + (index + 1) + " of " + scenes.length +
-      " · " + formatTime(currentTime) + " / " + formatTime(totalDuration);
-
-    el.progress.style.width =
-      Math.min(100, currentTime / totalDuration * 100) + "%";
-
-    timer = setTimeout(tick, 250);
-  }
-
-  function play() {
-    if (playing) return;
-
-    if (elapsedBeforePause >= totalDuration) {
-      index = 0;
-      elapsedBeforePause = 0;
-      render();
-    }
-
-    playing = true;
-    startedAt = Date.now();
-
-    el.play.textContent = "Ⅱ Pause";
-    el.voiceStatus.textContent = "Starting narration…";
-    el.voiceLight.style.background = "var(--gold)";
-
-    speakScene();
-    tick();
-  }
-
-  function pause() {
-    if (!playing) return;
-
-    elapsedBeforePause = elapsed();
-    playing = false;
-
-    clearTimeout(timer);
-    timer = null;
-    stopSpeech();
-
-    el.play.textContent = "▶ Resume with voice";
-    el.voiceStatus.textContent = "Paused";
-    el.voiceLight.style.background = "var(--gold)";
-
-    render();
-    el.play.textContent = "▶ Resume with voice";
-  }
-
-  function goToScene(newIndex) {
-    index = Math.max(0, Math.min(scenes.length - 1, newIndex));
-    elapsedBeforePause = getSceneStart(index);
-
-    if (playing) {
-      startedAt = Date.now();
-      render();
-      speakScene();
-    } else {
-      render();
-    }
-  }
-
-  el.play.addEventListener("click", () => {
-    if (playing) pause();
-    else play();
-  });
-
-  el.back.addEventListener("click", () => {
-    if (index > 0) goToScene(index - 1);
-  });
-
-  el.next.addEventListener("click", () => {
-    if (index === scenes.length - 1) {
-      index = 0;
-      elapsedBeforePause = 0;
-      render();
-
-      if (playing) {
-        startedAt = Date.now();
-        speakScene();
-      }
-    } else {
-      goToScene(index + 1);
-    }
-  });
-
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden && playing) pause();
-  });
-
-  render();
-})();
-</script>
+  })();
+  </script>
 </body>
 </html>
