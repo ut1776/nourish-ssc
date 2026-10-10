@@ -1,700 +1,1098 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#10152B">
-  <title>NOURISH-SSc | Interactive Prototype</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080d1b">
+<title>NOURISH-SSc | Cinematic Experience</title>
 
-  <style>
-    :root {
-      --bg: #10152b;
-      --panel: #1a2340;
-      --panel-light: #243151;
-      --mint: #83f0cc;
-      --blue: #9bbdff;
-      --text: #f7f8ff;
-      --muted: #bdc7df;
-      --border: rgba(255,255,255,.13);
-    }
+<style>
+:root {
+  --bg: #080d1b;
+  --mint: #8af3d2;
+  --blue: #a9c7ff;
+  --white: #f8faff;
+  --muted: #bdc8e0;
+  --panel: #121d33;
+}
+* { box-sizing: border-box; }
+html { min-height: 100%; scroll-behavior: smooth; }
 
-    * { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: var(--white);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Arial, sans-serif;
+  background:
+    radial-gradient(ellipse at 20% 15%, #233b68 0, transparent 42%),
+    radial-gradient(ellipse at 85% 90%, #154849 0, transparent 35%),
+    var(--bg);
+}
 
-    html { min-height: 100%; }
+button, select { font: inherit; }
+button { cursor: pointer; }
 
-    body {
-      margin: 0;
-      min-height: 100vh;
-      color: var(--text);
-      background:
-        radial-gradient(ellipse at 8% 8%, #30416c 0, transparent 38%),
-        radial-gradient(ellipse at 95% 85%, #1a4949 0, transparent 36%),
-        var(--bg);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-        Roboto, Helvetica, Arial, sans-serif;
-      -webkit-font-smoothing: antialiased;
-    }
+#cinema {
+  position: relative;
+  min-height: 100vh;
+  isolation: isolate;
+  overflow: hidden;
+}
 
-    button { font: inherit; }
+#cinema::before {
+  content: "";
+  position: fixed;
+  z-index: -2;
+  inset: -30%;
+  pointer-events: none;
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    transparent 0deg,
+    #83f0cc0b 45deg,
+    transparent 100deg,
+    #92aaff10 180deg,
+    transparent 260deg
+  );
+  animation: ambientRotate 45s linear infinite;
+}
 
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 18px clamp(16px, 5vw, 64px);
-      border-bottom: 1px solid var(--border);
-    }
+@keyframes ambientRotate {
+  to { transform: rotate(360deg); }
+}
 
-    .logo {
-      font-size: 16px;
-      font-weight: 850;
-      letter-spacing: 2px;
-    }
+#particles {
+  position: fixed;
+  z-index: -1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
 
-    .logo span { color: var(--mint); }
+.topbar {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  padding: 20px clamp(16px, 5vw, 66px);
+  border-bottom: 1px solid #ffffff13;
+  background: #080d1b70;
+  backdrop-filter: blur(15px);
+}
 
-    .status-pill {
-      padding: 7px 10px;
-      border: 1px solid #83f0cc66;
-      border-radius: 999px;
-      color: var(--mint);
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 1px;
-      white-space: nowrap;
-    }
+.brand {
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 2.5px;
+}
+.brand span { color: var(--mint); }
 
-    .wrap {
-      width: min(100% - 32px, 1040px);
-      margin: 0 auto;
-      padding: 32px 0 42px;
-    }
+.tag {
+  border: 1px solid #8af3d266;
+  border-radius: 100px;
+  padding: 7px 11px;
+  color: var(--mint);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.3px;
+}
 
-    .eyebrow {
-      color: var(--mint);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 2.4px;
-      text-transform: uppercase;
-    }
+.container {
+  width: min(1100px, calc(100% - 34px));
+  margin: auto;
+}
 
-    h1 {
-      margin: 15px 0;
-      font-size: clamp(36px, 7vw, 66px);
-      line-height: 1.03;
-      letter-spacing: -2px;
-    }
+.hero {
+  position: relative;
+  padding: clamp(46px, 9vw, 110px) 0 30px;
+}
 
-    .accent { color: var(--mint); }
+.kicker {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: var(--mint);
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
 
-    .lead {
-      max-width: 690px;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.8;
-    }
+.kicker::before {
+  content: "";
+  display: block;
+  width: 32px;
+  height: 1px;
+  background: var(--mint);
+  box-shadow: 0 0 12px var(--mint);
+}
 
-    .stage {
-      position: relative;
-      isolation: isolate;
-      overflow: hidden;
-      min-height: 390px;
-      margin-top: 28px;
-      padding: clamp(22px, 5vw, 48px);
-      border: 1px solid var(--border);
-      border-radius: 27px;
-      background: linear-gradient(145deg, #1c2746f5, #111a30f5);
-      box-shadow: 0 25px 80px #0004;
-    }
+.hero h1 {
+  max-width: 950px;
+  margin: 22px 0 18px;
+  font-size: clamp(43px, 9vw, 100px);
+  font-weight: 850;
+  line-height: .98;
+  letter-spacing: -.065em;
+}
 
-    .stage::before,
-    .stage::after {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      width: 190px;
-      height: 190px;
-      border-radius: 50%;
-      pointer-events: none;
-      filter: blur(3px);
-      animation: glow 7s ease-in-out infinite alternate;
-    }
+.hero h1 span {
+  color: var(--mint);
+  text-shadow: 0 0 35px #83f0cc22;
+}
 
-    .stage::before {
-      top: -90px;
-      right: -50px;
-      background: #83f0cc22;
-    }
+.hero-copy {
+  max-width: 640px;
+  color: var(--muted);
+  font-size: clamp(14px, 2vw, 17px);
+  line-height: 1.85;
+}
 
-    .stage::after {
-      bottom: -125px;
-      left: 30%;
-      background: #9bbdff18;
-      animation-delay: -3s;
-    }
+.hero-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 25px;
+}
 
-    @keyframes glow {
-      from { transform: scale(.8); opacity: .5; }
-      to { transform: scale(1.35); opacity: 1; }
-    }
+.meta-chip {
+  padding: 9px 12px;
+  border: 1px solid #ffffff1b;
+  border-radius: 100px;
+  color: #d4deef;
+  background: #ffffff06;
+  font-size: 11px;
+}
 
-    .scene {
-      animation: sceneIn .45s ease both;
-    }
+.film {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 490px;
+  margin: 25px 0 0;
+  border: 1px solid #ffffff22;
+  border-radius: 25px;
+  background:
+    radial-gradient(ellipse at 50% 5%, #34517d48, transparent 60%),
+    linear-gradient(150deg, #15203a, #090f20 75%);
+  box-shadow: 0 30px 100px #0007;
+}
 
-    @keyframes sceneIn {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+.film::before,
+.film::after {
+  content: "";
+  position: absolute;
+  z-index: 4;
+  left: 0;
+  right: 0;
+  height: 13px;
+  background: #050812;
+  pointer-events: none;
+}
+.film::before { top: 0; }
+.film::after { bottom: 0; }
 
-    .scene-kicker {
-      color: var(--blue);
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: 2px;
-    }
+.film-light {
+  position: absolute;
+  z-index: -1;
+  width: 360px;
+  height: 360px;
+  left: 50%;
+  top: -200px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: #83f0cc19;
+  filter: blur(40px);
+  animation: lightPulse 5s ease-in-out infinite alternate;
+}
 
-    .scene h2 {
-      max-width: 760px;
-      margin: 15px 0 12px;
-      font-size: clamp(27px, 4.6vw, 43px);
-      line-height: 1.13;
-      letter-spacing: -1px;
-    }
+@keyframes lightPulse {
+  from { opacity: .45; transform: translateX(-60%) scale(.8); }
+  to { opacity: 1; transform: translateX(-40%) scale(1.3); }
+}
 
-    .scene-description {
-      max-width: 740px;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.85;
-    }
+.scene-content {
+  position: relative;
+  z-index: 2;
+  min-height: 475px;
+  padding: clamp(38px, 7vw, 76px) clamp(22px, 6vw, 65px) 46px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 13px;
-      margin-top: 25px;
-    }
+.scene-enter {
+  animation: movieReveal .85s cubic-bezier(.2,.7,.2,1) both;
+}
 
-    .feature-card {
-      min-width: 0;
-      padding: 18px 15px;
-      border: 1px solid var(--border);
-      border-radius: 19px;
-      background: #ffffff08;
-      animation: floatIn .55s ease both;
-    }
+@keyframes movieReveal {
+  from { opacity: 0; transform: translateY(23px) scale(.985); filter: blur(5px); }
+  to { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
 
-    .feature-card:nth-child(2) { animation-delay: .08s; }
-    .feature-card:nth-child(3) { animation-delay: .16s; }
+.scene-number {
+  color: var(--mint);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 3px;
+}
 
-    @keyframes floatIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+.scene-title {
+  max-width: 850px;
+  margin: 18px 0;
+  font-size: clamp(32px, 6.3vw, 69px);
+  font-weight: 850;
+  line-height: 1.04;
+  letter-spacing: -.045em;
+  text-wrap: balance;
+}
 
-    .feature-icon {
-      display: block;
-      margin-bottom: 13px;
-      font-size: 29px;
-    }
+.scene-title .highlight {
+  color: var(--mint);
+  text-shadow: 0 0 32px #83f0cc20;
+}
 
-    .feature-title {
-      font-size: 14px;
-      font-weight: 800;
-      line-height: 1.4;
-    }
+.scene-description {
+  max-width: 700px;
+  color: #c3cee4;
+  font-size: clamp(14px, 2vw, 17px);
+  line-height: 1.9;
+}
 
-    .feature-copy {
-      margin-top: 7px;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.6;
-      overflow-wrap: anywhere;
-    }
+.orbit-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 175px;
+  margin: 15px 0 22px;
+}
 
-    .callout {
-      margin-top: 20px;
-      padding: 15px 17px;
-      border-left: 3px solid var(--mint);
-      border-radius: 0 12px 12px 0;
-      background: #83f0cc0b;
-      color: #e6f8f2;
-      font-size: 13px;
-      line-height: 1.7;
-    }
+.orbit {
+  position: absolute;
+  width: 155px;
+  height: 155px;
+  border: 1px solid #8af3d240;
+  border-radius: 50%;
+  box-shadow: 0 0 25px #83f0cc0c, inset 0 0 25px #83f0cc08;
+  animation: orbitSpin 15s linear infinite;
+}
+.orbit.two {
+  width: 120px;
+  height: 120px;
+  border-color: #a9c7ff60;
+  animation-duration: 11s;
+  animation-direction: reverse;
+}
+.orbit.three {
+  width: 185px;
+  height: 185px;
+  border-style: dashed;
+  border-color: #ffffff1b;
+  animation-duration: 28s;
+}
 
-    .progress-meta {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      margin-top: 30px;
-      color: var(--muted);
-      font-size: 11px;
-    }
+.orbit::after {
+  content: "";
+  position: absolute;
+  top: 20%;
+  left: 12%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--mint);
+  box-shadow: 0 0 20px var(--mint);
+}
 
-    .progress-track {
-      height: 5px;
-      margin-top: 9px;
-      overflow: hidden;
-      border-radius: 20px;
-      background: #ffffff18;
-    }
+.orbit-center {
+  display: grid;
+  place-items: center;
+  width: 85px;
+  height: 85px;
+  border: 1px solid #8af3d277;
+  border-radius: 50%;
+  background: radial-gradient(circle, #83f0cc24, #101a2f);
+  box-shadow: 0 0 50px #83f0cc16;
+  font-size: 35px;
+  animation: centerPulse 3s ease-in-out infinite alternate;
+}
 
-    #progress {
-      width: 14.285%;
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, var(--mint), var(--blue));
-      transition: width .35s ease;
-    }
+@keyframes orbitSpin {
+  to { transform: rotate(360deg); }
+}
+@keyframes centerPulse {
+  from { transform: scale(.96); box-shadow: 0 0 20px #83f0cc10; }
+  to { transform: scale(1.04); box-shadow: 0 0 45px #83f0cc2a; }
+}
 
-    .controls {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 17px;
-    }
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
 
-    .btn {
-      min-height: 47px;
-      padding: 12px 16px;
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      color: var(--text);
-      background: #ffffff0b;
-      font-size: 13px;
-      font-weight: 750;
-      cursor: pointer;
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
-    }
+.card {
+  padding: 19px 16px;
+  border: 1px solid #ffffff1c;
+  border-radius: 17px;
+  background: linear-gradient(140deg, #ffffff0c, #ffffff03);
+  backdrop-filter: blur(8px);
+  animation: cardRise .65s ease both;
+  transition: border-color .3s, background .3s, transform .3s;
+}
+.card:nth-child(2) { animation-delay: .12s; }
+.card:nth-child(3) { animation-delay: .24s; }
 
-    .btn.primary {
-      border-color: var(--mint);
-      background: var(--mint);
-      color: #10251f;
-    }
+.card:hover {
+  transform: translateY(-4px);
+  border-color: #8af3d277;
+  background: #83f0cc0b;
+}
 
-    .btn:active { transform: scale(.98); }
+@keyframes cardRise {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-    .btn:focus-visible {
-      outline: 3px solid var(--blue);
-      outline-offset: 3px;
-    }
+.card-icon {
+  margin-bottom: 13px;
+  font-size: 29px;
+}
+.card-title { font-size: 14px; font-weight: 800; }
+.card-text {
+  margin-top: 7px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
 
-    .live-status {
-      min-height: 23px;
-      margin-top: 13px;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.7;
-    }
+.scene-note {
+  margin-top: 22px;
+  padding: 15px 17px;
+  border-left: 2px solid var(--mint);
+  background: #83f0cc08;
+  color: #dcebe9;
+  font-size: 13px;
+  line-height: 1.8;
+}
 
-    .disclaimer {
-      margin-top: 24px;
-      padding: 18px;
-      border: 1px solid var(--border);
-      border-radius: 15px;
-      color: var(--muted);
-      background: #ffffff06;
-      font-size: 12px;
-      line-height: 1.8;
-    }
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 18px 2px 8px;
+  color: #b9c6df;
+  font-size: 11px;
+}
 
-    .disclaimer strong { color: var(--mint); }
+.progress {
+  height: 4px;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #ffffff17;
+}
 
-    footer {
-      padding: 23px 15px 30px;
-      border-top: 1px solid var(--border);
-      color: #9daac6;
-      text-align: center;
-      font-size: 11px;
-      line-height: 1.8;
-    }
+.progress-fill {
+  width: 14.285%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--mint), var(--blue));
+  box-shadow: 0 0 15px #83f0cc70;
+  transition: width .55s ease;
+}
 
-    @media (max-width: 620px) {
-      .wrap { padding-top: 25px; }
-      .cards { grid-template-columns: 1fr; }
-      .feature-card {
-        display: grid;
-        grid-template-columns: 43px minmax(0, 1fr);
-        column-gap: 10px;
-        align-items: start;
-        padding: 14px;
-      }
-      .feature-icon {
-        grid-row: span 2;
-        margin: 0;
-      }
-      .feature-copy { margin-top: 3px; }
-      .stage { min-height: 470px; }
-      .btn { flex: 1 1 auto; }
-    }
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
 
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: .01ms !important;
-        scroll-behavior: auto !important;
-      }
-    }
-  </style>
+.btn {
+  min-height: 47px;
+  padding: 12px 16px;
+  border: 1px solid #ffffff25;
+  border-radius: 12px;
+  background: #ffffff09;
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 800;
+  transition: background .2s, border-color .2s;
+  touch-action: manipulation;
+}
+
+.btn:hover {
+  border-color: #8af3d277;
+  background: #83f0cc0b;
+}
+
+.btn.primary {
+  border-color: var(--mint);
+  background: var(--mint);
+  color: #10241f;
+}
+
+.btn:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 3px;
+}
+
+.voice-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 13px;
+  margin-top: 22px;
+  padding: 17px;
+  border: 1px solid #ffffff18;
+  border-radius: 16px;
+  background: #ffffff05;
+}
+
+.voice-label {
+  display: block;
+  margin-bottom: 8px;
+  color: #e4ebfa;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+select {
+  width: 100%;
+  min-height: 43px;
+  padding: 10px;
+  border: 1px solid #ffffff25;
+  border-radius: 10px;
+  color: var(--white);
+  background: #141e35;
+  font-size: 12px;
+}
+
+.voice-status {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.disclaimer {
+  margin: 25px 0 32px;
+  padding: 18px;
+  border: 1px solid #ffffff17;
+  border-radius: 14px;
+  background: #ffffff05;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.85;
+}
+.disclaimer strong { color: var(--mint); }
+
+footer {
+  padding: 25px 16px 32px;
+  border-top: 1px solid #ffffff13;
+  color: #9eabc6;
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+@media (max-width: 620px) {
+  .hero { padding-top: 48px; }
+  .cards { grid-template-columns: 1fr; }
+  .card {
+    display: grid;
+    grid-template-columns: 43px minmax(0, 1fr);
+    column-gap: 10px;
+    padding: 14px;
+  }
+  .card-icon { grid-row: span 2; margin: 0; }
+  .card-text { margin-top: 3px; }
+  .film { min-height: 610px; }
+  .scene-content { min-height: 595px; padding: 48px 20px 36px; }
+  .orbit-stage { min-height: 135px; }
+  .orbit { width: 120px; height: 120px; }
+  .orbit.two { width: 92px; height: 92px; }
+  .orbit.three { width: 145px; height: 145px; }
+  .orbit-center { width: 68px; height: 68px; }
+  .controls .btn { flex: 1 1 40%; }
+  .voice-panel { grid-template-columns: 1fr; }
+  .voice-status { grid-column: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+</style>
 </head>
 
 <body>
+<div id="cinema">
+  <canvas id="particles" aria-hidden="true"></canvas>
+
   <header class="topbar">
-    <div class="logo">NOURISH<span>•</span>SSc</div>
-    <div class="status-pill">PHASE 1 · PROTOTYPE</div>
+    <div class="brand">NOURISH<span>•</span>SSc</div>
+    <div class="tag">CINEMATIC PROTOTYPE</div>
   </header>
 
-  <main class="wrap">
-    <div class="eyebrow">Nutrition · Symptoms · Follow-up</div>
-
-    <h1>
-      Make difficult days<br>
-      <span class="accent">easier to explain.</span>
-    </h1>
-
-    <p class="lead">
-      A human-centered digital health concept for people living with
-      systemic sclerosis. Record nutrition challenges, review personal
-      entries, and prepare more focused questions for care conversations.
-    </p>
-
-    <section class="stage" aria-label="Interactive prototype presentation">
-      <div id="scene-content">
-        <!-- Default content remains visible if JavaScript does not run. -->
-        <article class="scene">
-          <div class="scene-kicker">SCENE 01 OF 07</div>
-          <h2>Your experience is more than a symptom.</h2>
-          <p class="scene-description">
-            Nutrition challenges can overlap with symptoms, everyday
-            routines, and questions about follow-up. A useful record
-            starts with the person's own experience.
-          </p>
-          <div class="cards">
-            <div class="feature-card">
-              <span class="feature-icon">🥣</span>
-              <div class="feature-title">Nutrition</div>
-              <div class="feature-copy">What felt difficult today?</div>
-            </div>
-            <div class="feature-card">
-              <span class="feature-icon">📝</span>
-              <div class="feature-title">Daily check-in</div>
-              <div class="feature-copy">Capture it in your own words.</div>
-            </div>
-            <div class="feature-card">
-              <span class="feature-icon">🤝</span>
-              <div class="feature-title">Follow-up</div>
-              <div class="feature-copy">Prepare questions to discuss.</div>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <div class="progress-meta">
-        <span id="scene-label">SCENE 1 OF 7</span>
-        <span id="progress-label">14% complete</span>
-      </div>
-      <div
-        class="progress-track"
-        role="progressbar"
-        aria-label="Presentation progress"
-        aria-valuemin="1"
-        aria-valuemax="7"
-        aria-valuenow="1"
-        id="progress-track"
-      >
-        <div id="progress"></div>
+  <main class="container">
+    <section class="hero">
+      <div class="kicker">A different way to connect the dots</div>
+      <h1>From daily challenges<br>to <span>better conversations.</span></h1>
+      <p class="hero-copy">
+        Nutrition difficulties deserve to be heard. Explore a human-centered
+        concept for recording personal experiences and preparing for more
+        focused follow-up conversations in systemic sclerosis care.
+      </p>
+      <div class="hero-meta">
+        <span class="meta-chip">✦ Nutrition experiences</span>
+        <span class="meta-chip">✦ Personal records</span>
+        <span class="meta-chip">✦ Care conversations</span>
       </div>
     </section>
 
-    <div class="controls">
-      <button class="btn" id="back" type="button">← Back</button>
-      <button class="btn primary" id="play" type="button">
-        ▶ Play narration
-      </button>
-      <button class="btn" id="next" type="button">Next →</button>
-      <button class="btn" id="replay" type="button">↻ Replay scene</button>
+    <section class="film" aria-label="Cinematic presentation">
+      <div class="film-light"></div>
+      <div id="scene-content" class="scene-content">
+        <!-- Fallback: visible even before JavaScript runs. -->
+        <div class="scene-number">SCENE 01 / 07</div>
+        <div class="orbit-stage">
+          <div class="orbit three"></div>
+          <div class="orbit"></div>
+          <div class="orbit two"></div>
+          <div class="orbit-center">✦</div>
+        </div>
+        <h2 class="scene-title">Every experience <span class="highlight">matters.</span></h2>
+        <p class="scene-description">
+          A concept that gives people a place to record nutrition challenges
+          and prepare questions for their healthcare team.
+        </p>
+      </div>
+    </section>
+
+    <div class="progress-info">
+      <span id="scene-label">SCENE 1 OF 7</span>
+      <span id="progress-label">14% complete</span>
+    </div>
+    <div class="progress" role="progressbar" aria-label="Presentation progress"
+         aria-valuemin="1" aria-valuemax="7" aria-valuenow="1"
+         id="progress-track">
+      <div class="progress-fill" id="progress-fill"></div>
     </div>
 
-    <div class="live-status" id="status" role="status" aria-live="polite">
-      Ready · Scene 1 of 7 · Use Next to explore the presentation.
+    <div class="controls">
+      <button class="btn" id="back" type="button">← Previous</button>
+      <button class="btn primary" id="play" type="button">▶ Play movie</button>
+      <button class="btn" id="next" type="button">Next scene →</button>
+      <button class="btn" id="replay" type="button">↻ Replay narration</button>
     </div>
+
+    <section class="voice-panel">
+      <div>
+        <label class="voice-label" for="voice-select">Narrator voice</label>
+        <select id="voice-select">
+          <option value="auto">Best available English voice</option>
+        </select>
+      </div>
+      <div>
+        <label class="voice-label" for="speed-select">Narration pace</label>
+        <select id="speed-select">
+          <option value="0.82">Slow and cinematic</option>
+          <option value="0.92" selected>Natural documentary</option>
+          <option value="1">Standard</option>
+        </select>
+      </div>
+      <p class="voice-status" id="voice-status" role="status" aria-live="polite">
+        Voice selection will load when supported by your browser.
+        Available voices depend on your device.
+      </p>
+    </section>
 
     <aside class="disclaimer">
-      <strong>Prototype, not a clinical product.</strong>
-      This demonstration uses illustrative content. It does not diagnose
-      disease, predict progression, recommend treatment, or provide
-      clinical monitoring. It has not been clinically validated.
-      No clinician is monitoring this demo.
+      <strong>Research prototype — not a clinical product.</strong>
+      All displayed content is illustrative. This demo does not diagnose,
+      predict disease progression, recommend treatment, or provide clinical
+      monitoring. It has not been clinically validated. No clinician is
+      monitoring this demonstration.
     </aside>
   </main>
 
   <footer>
     NOURISH-SSc · Human-centered digital health concept<br>
-    Demonstration only · Fictional illustrative content
+    A demonstration of a possible future workflow
   </footer>
+</div>
 
-  <script>
-  (function () {
-    "use strict";
+<script>
+(function () {
+  "use strict";
 
-    var scenes = [
-      {
-        title: "Your experience is more than a symptom.",
-        text: "Nutrition challenges can overlap with symptoms, everyday routines, and questions about follow-up. A useful record starts with the person's own experience.",
-        cards: [
-          ["🥣", "Nutrition", "What felt difficult today?"],
-          ["📝", "Daily check-in", "Capture it in your own words."],
-          ["🤝", "Follow-up", "Prepare questions to discuss."]
-        ],
-        note: "Start with what matters to the person.",
-        narration: "Welcome to Nourish S S C. This concept starts with a simple idea: make nutrition difficulties easier to record and easier to discuss."
-      },
-      {
-        title: "Small difficulties deserve to be recorded.",
-        text: "A short check-in can capture eating challenges, appetite, digestive discomfort, or other concerns in the person's own words.",
-        cards: [
-          ["🍽️", "Eating", "Describe the challenge."],
-          ["💬", "Symptoms", "Record what you noticed."],
-          ["📅", "Context", "Add a date and notes."]
-        ],
-        note: "People can describe their own experience without being forced into a predefined explanation.",
-        narration: "The check-in gives people a place to record what happened, what felt difficult, and what they want to remember."
-      },
-      {
-        title: "A record should fit real life.",
-        text: "Short entries and optional notes can make documenting difficult days more manageable than writing a long diary.",
-        cards: [
-          ["✍️", "Simple entry", "Use your own words."],
-          ["⏱️", "Your pace", "Add information when ready."],
-          ["🔒", "Privacy first", "Use fictional data in this demo."]
-        ],
-        note: "The intended design principle is low effort, with user control over what they record.",
-        narration: "The goal is to make recording manageable. This demonstration uses illustrative content and is not connected to a clinical record."
-      },
-      {
-        title: "Look back at what you recorded.",
-        text: "A timeline could help users review their own entries and prepare observations. A pattern in a log is not proof of cause or a medical finding.",
-        cards: [
-          ["📈", "Your entries", "Review recorded information."],
-          ["🔎", "Your observations", "Notice what to ask about."],
-          ["🧭", "Stay grounded", "No automated diagnosis."]
-        ],
-        note: "Personal records can support a conversation, but they do not establish a medical explanation.",
-        narration: "Looking back may help someone explain what they have experienced. The prototype does not infer a diagnosis or determine the cause of symptoms."
-      },
-      {
-        title: "Turn concerns into questions.",
-        text: "A care summary could organize selected entries into discussion points for an appointment or another appropriate follow-up conversation.",
-        cards: [
-          ["📋", "Summary", "Organize your notes."],
-          ["❓", "Questions", "What should I ask my care team?"],
-          ["🤝", "Conversation", "Discuss next steps together."]
-        ],
-        note: "The person remains in control of the information they choose to share.",
-        narration: "Instead of trying to remember everything during an appointment, a person can prepare a summary and questions to discuss with their healthcare professional."
-      },
-      {
-        title: "Designed around people and care.",
-        text: "The concept aims to connect daily experience with better-prepared conversations, while leaving clinical decisions to qualified professionals.",
-        cards: [
-          ["🧑", "Patient perspective", "What matters day to day?"],
-          ["🩺", "Care perspective", "What needs clarification?"],
-          ["🔄", "Shared discussion", "Agree on appropriate follow-up."]
-        ],
-        note: "This is a communication-support concept, not a replacement for care.",
-        narration: "The intended value is better preparation and communication, not replacing a healthcare professional or claiming that a clinician is monitoring the app."
-      },
-      {
-        title: "A concept to test with real feedback.",
-        text: "The next step is usability feedback from people with relevant lived experience and healthcare professionals, followed by careful refinement and evaluation.",
-        cards: [
-          ["🗣️", "Gather feedback", "Is it understandable?"],
-          ["🛠️", "Improve usability", "Remove unnecessary effort."],
-          ["📊", "Evaluate", "Test before making claims."]
-        ],
-        note: "Usability, accessibility, safety, and impact must be evaluated before clinical benefit can be claimed.",
-        narration: "Nourish S S C is a prototype concept. Its usefulness, accessibility, safety, and impact must be evaluated before any clinical benefit can be claimed. Thank you."
-      }
+  var scenes = [
+    {
+      title: "Every experience <span class='highlight'>matters.</span>",
+      text: "Living with systemic sclerosis can involve challenges that are difficult to explain in a short appointment. This concept begins with listening to the person's own experience.",
+      icon: "✦",
+      cards: [
+        ["🥣", "Nutrition", "What felt difficult today?"],
+        ["📝", "Daily experience", "Capture your own words."],
+        ["🤝", "Follow-up", "Prepare questions to discuss."]
+      ],
+      note: "The starting point is the person, not an algorithm.",
+      voice: "Every experience matters. Living with systemic sclerosis can involve challenges that are difficult to explain in a short appointment. Nourish S S C begins with listening."
+    },
+    {
+      title: "Small challenges. <span class='highlight'>Real impact.</span>",
+      text: "Eating difficulties, appetite changes, digestive discomfort, and everyday obstacles can be worth documenting so they are easier to discuss.",
+      icon: "◈",
+      cards: [
+        ["🍽️", "Eating", "Describe the challenge."],
+        ["💬", "Symptoms", "Record what you noticed."],
+        ["📅", "Context", "Add a date and notes."]
+      ],
+      note: "A simple record can help someone remember what they want to raise.",
+      voice: "Small challenges can have a real impact. A short check in can help someone document eating difficulties, symptoms, and the context they want to remember."
+    },
+    {
+      title: "Make room for <span class='highlight'>real life.</span>",
+      text: "A lightweight check-in with optional notes can make recording experiences feel more manageable than keeping a detailed diary.",
+      icon: "◌",
+      cards: [
+        ["✍️", "Your words", "Describe your experience."],
+        ["⏱️", "Your pace", "Record when you're ready."],
+        ["🔐", "Your choice", "Choose what to share."]
+      ],
+      note: "A future version should be tested for accessibility, effort, and privacy.",
+      voice: "The tool should fit real life. Short entries and optional notes could make recording easier, while keeping the person in control of what they choose to share."
+    },
+    {
+      title: "See your story <span class='highlight'>over time.</span>",
+      text: "A timeline could organize personal entries and make it easier to review what happened before an appointment.",
+      icon: "⌁",
+      cards: [
+        ["📈", "Your entries", "Review recorded information."],
+        ["🔎", "Your observations", "Notice questions to ask."],
+        ["🧭", "Clear boundaries", "No automated diagnosis."]
+      ],
+      note: "A pattern in a personal log does not prove a medical cause.",
+      voice: "Over time, a timeline could help someone review their own entries. It is a way to prepare observations, not a diagnostic tool or proof of a medical cause."
+    },
+    {
+      title: "Turn memories into <span class='highlight'>questions.</span>",
+      text: "A care summary could bring selected entries together as practical discussion points for an appointment or appropriate follow-up.",
+      icon: "◇",
+      cards: [
+        ["📋", "A summary", "Organize your notes."],
+        ["❓", "Your questions", "What needs clarification?"],
+        ["🩺", "Care discussion", "Talk with your team."]
+      ],
+      note: "The aim is to support communication, not replace clinical judgement.",
+      voice: "A prepared summary can help someone bring the right questions to an appointment. Clinical decisions remain with the person and their qualified healthcare professionals."
+    },
+    {
+      title: "Better prepared. <span class='highlight'>Better connected.</span>",
+      text: "The concept connects the everyday experience of the person with a more organized conversation about concerns and possible next steps.",
+      icon: "✧",
+      cards: [
+        ["🧑", "Personal perspective", "What matters to you?"],
+        ["🩺", "Clinical perspective", "What needs discussion?"],
+        ["↔️", "Shared conversation", "Clarify follow-up."]
+      ],
+      note: "This demo does not send alerts or monitor patients.",
+      voice: "Better prepared means having your experience and questions ready. Nourish S S C is designed as a communication concept, not a replacement for healthcare or a system that monitors patients."
+    },
+    {
+      title: "A concept worth <span class='highlight'>testing.</span>",
+      text: "The next step is structured feedback from people with relevant lived experience and healthcare professionals, followed by careful usability and safety evaluation.",
+      icon: "✦",
+      cards: [
+        ["🗣️", "Listen", "Gather user feedback."],
+        ["🛠️", "Refine", "Improve the workflow."],
+        ["📊", "Evaluate", "Measure before claiming."]
+      ],
+      note: "Clinical benefit, safety, and sustained use must be evaluated rather than assumed.",
+      voice: "The next step is testing the concept with people and healthcare professionals, improving it from their feedback, and evaluating its safety and usefulness. Nourish S S C. From daily challenges to better conversations."
+    }
+  ];
+
+  var current = 0;
+  var moviePlaying = false;
+  var sceneTimer = null;
+  var speechToken = 0;
+  var voices = [];
+  var particles = [];
+  var canvas = document.getElementById("particles");
+  var ctx = canvas.getContext ? canvas.getContext("2d") : null;
+
+  var content = document.getElementById("scene-content");
+  var progressFill = document.getElementById("progress-fill");
+  var progressTrack = document.getElementById("progress-track");
+  var sceneLabel = document.getElementById("scene-label");
+  var progressLabel = document.getElementById("progress-label");
+  var playButton = document.getElementById("play");
+  var voiceSelect = document.getElementById("voice-select");
+  var speedSelect = document.getElementById("speed-select");
+  var voiceStatus = document.getElementById("voice-status");
+
+  var reducedMotion = false;
+  try {
+    reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+  } catch (e) {}
+
+  function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, function (c) {
+      return {
+        "&": "&amp;", "<": "&lt;", ">": "&gt;",
+        '"': "&quot;", "'": "&#39;"
+      }[c];
+    });
+  }
+
+  function render() {
+    var scene = scenes[current];
+
+    var cardsHTML = scene.cards.map(function (card) {
+      return '<div class="card">' +
+        '<div class="card-icon">' + escapeHTML(card[0]) + '</div>' +
+        '<div class="card-title">' + escapeHTML(card[1]) + '</div>' +
+        '<div class="card-text">' + escapeHTML(card[2]) + '</div>' +
+        '</div>';
+    }).join("");
+
+    content.innerHTML =
+      '<div class="scene-number">SCENE ' +
+        String(current + 1).padStart(2, "0") + ' / ' +
+        String(scenes.length).padStart(2, "0") +
+      '</div>' +
+      '<div class="orbit-stage" aria-hidden="true">' +
+        '<div class="orbit three"></div>' +
+        '<div class="orbit"></div>' +
+        '<div class="orbit two"></div>' +
+        '<div class="orbit-center">' + escapeHTML(scene.icon) + '</div>' +
+      '</div>' +
+      '<h2 class="scene-title">' + scene.title + '</h2>' +
+      '<p class="scene-description">' + escapeHTML(scene.text) + '</p>' +
+      '<div class="cards">' + cardsHTML + '</div>' +
+      '<div class="scene-note">' + escapeHTML(scene.note) + '</div>';
+
+    progressFill.style.width =
+      (((current + 1) / scenes.length) * 100) + "%";
+    sceneLabel.textContent =
+      "SCENE " + (current + 1) + " OF " + scenes.length;
+    progressLabel.textContent =
+      Math.round(((current + 1) / scenes.length) * 100) +
+      "% complete";
+    progressTrack.setAttribute("aria-valuenow", current + 1);
+  }
+
+  function stopSpeech() {
+    speechToken++;
+    if ("speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+    }
+  }
+
+  function stopMovie() {
+    moviePlaying = false;
+    clearTimeout(sceneTimer);
+    stopSpeech();
+    playButton.textContent = "▶ Play movie";
+  }
+
+  function getSelectedVoice() {
+    var value = voiceSelect.value;
+    if (value === "auto") {
+      return chooseBestVoice(voices);
+    }
+    for (var i = 0; i < voices.length; i++) {
+      if (voices[i].voiceURI === value) return voices[i];
+    }
+    return chooseBestVoice(voices);
+  }
+
+  function chooseBestVoice(list) {
+    var english = list.filter(function (v) {
+      return /^en(-|_|$)/i.test(v.lang || "");
+    });
+
+    var preferredNames = [
+      "david", "guy", "daniel", "alex", "james",
+      "mark", "tom", "fred", "male", "matthew"
     ];
 
-    var current = 0;
-    var speaking = false;
-
-    var content = document.getElementById("scene-content");
-    var progress = document.getElementById("progress");
-    var progressTrack = document.getElementById("progress-track");
-    var sceneLabel = document.getElementById("scene-label");
-    var progressLabel = document.getElementById("progress-label");
-    var status = document.getElementById("status");
-    var playButton = document.getElementById("play");
-
-    function escapeHTML(value) {
-      return String(value).replace(/[&<>"']/g, function (character) {
-        var map = {
-          "&": "&amp;",
-          "<": "&lt;",
-          ">": "&gt;",
-          '"': "&quot;",
-          "'": "&#39;"
-        };
-        return map[character];
-      });
-    }
-
-    function render() {
-      var scene = scenes[current];
-
-      var cardHTML = scene.cards.map(function (card) {
-        return (
-          '<div class="feature-card">' +
-            '<span class="feature-icon">' +
-              escapeHTML(card[0]) +
-            '</span>' +
-            '<div class="feature-title">' +
-              escapeHTML(card[1]) +
-            '</div>' +
-            '<div class="feature-copy">' +
-              escapeHTML(card[2]) +
-            '</div>' +
-          '</div>'
-        );
-      }).join("");
-
-      content.innerHTML =
-        '<article class="scene">' +
-          '<div class="scene-kicker">SCENE ' +
-            String(current + 1).padStart(2, "0") +
-            ' OF ' + String(scenes.length).padStart(2, "0") +
-          '</div>' +
-          '<h2>' + escapeHTML(scene.title) + '</h2>' +
-          '<p class="scene-description">' +
-            escapeHTML(scene.text) +
-          '</p>' +
-          '<div class="cards">' + cardHTML + '</div>' +
-          '<div class="callout">' +
-            escapeHTML(scene.note) +
-          '</div>' +
-        '</article>';
-
-      var percentage = Math.round(
-        ((current + 1) / scenes.length) * 100
-      );
-
-      progress.style.width = percentage + "%";
-      sceneLabel.textContent =
-        "SCENE " + (current + 1) + " OF " + scenes.length;
-      progressLabel.textContent = percentage + "% complete";
-      progressTrack.setAttribute("aria-valuenow", current + 1);
-    }
-
-    function stopSpeech() {
-      if ("speechSynthesis" in window) {
-        window.speechSynthesis.cancel();
-      }
-      speaking = false;
-      playButton.textContent = "▶ Play narration";
-    }
-
-    function speakCurrentScene() {
-      if (!("speechSynthesis" in window) ||
-          typeof window.SpeechSynthesisUtterance === "undefined") {
-        speaking = false;
-        playButton.textContent = "▶ Play narration";
-        status.textContent =
-          "Voice is unavailable in this browser. The presentation still works; read the text on screen.";
-        return;
-      }
-
-      window.speechSynthesis.cancel();
-
-      var utterance = new window.SpeechSynthesisUtterance(
-        scenes[current].narration
-      );
-
-      utterance.lang = "en-US";
-      utterance.rate = 0.94;
-      utterance.pitch = 0.95;
-      utterance.volume = 1;
-
-      utterance.onend = function () {
-        if (speaking) {
-          status.textContent =
-            "Narration finished · Scene " +
-            (current + 1) + " of " + scenes.length;
+    for (var p = 0; p < preferredNames.length; p++) {
+      for (var i = 0; i < english.length; i++) {
+        if ((english[i].name || "").toLowerCase()
+            .indexOf(preferredNames[p]) !== -1) {
+          return english[i];
         }
-      };
-
-      utterance.onerror = function () {
-        status.textContent =
-          "Voice playback failed. You can continue using the visual presentation.";
-      };
-
-      try {
-        window.speechSynthesis.speak(utterance);
-        status.textContent =
-          "Narration requested · Scene " +
-          (current + 1) + " of " + scenes.length;
-      } catch (error) {
-        status.textContent =
-          "Voice could not start. Use Next to continue the presentation.";
       }
     }
 
-    function goToScene(index) {
-      current = (index + scenes.length) % scenes.length;
+    var usVoice = english.find(function (v) {
+      return /^en-US$/i.test(v.lang || "");
+    });
+
+    return usVoice || english[0] || null;
+  }
+
+  function loadVoices() {
+    if (!("speechSynthesis" in window)) {
+      voiceStatus.textContent =
+        "Speech synthesis is not available in this browser. The animated presentation remains usable.";
+      return;
+    }
+
+    voices = window.speechSynthesis.getVoices() || [];
+    var previous = voiceSelect.value || "auto";
+
+    voiceSelect.innerHTML =
+      '<option value="auto">Best available English voice</option>';
+
+    voices.filter(function (v) {
+      return /^en(-|_|$)/i.test(v.lang || "");
+    }).forEach(function (v) {
+      var option = document.createElement("option");
+      option.value = v.voiceURI;
+      option.textContent = v.name + " — " + v.lang;
+      voiceSelect.appendChild(option);
+    });
+
+    var selected = chooseBestVoice(voices);
+    if (previous !== "auto" && voices.some(function (v) {
+      return v.voiceURI === previous;
+    })) {
+      voiceSelect.value = previous;
+    } else {
+      voiceSelect.value = "auto";
+    }
+
+    if (selected) {
+      voiceStatus.textContent =
+        "Suggested voice: " + selected.name + " (" + selected.lang +
+        "). Choose another English voice if preferred. Voice gender and quality depend on the device.";
+    } else {
+      voiceStatus.textContent =
+        "No English system voice has loaded yet. Try again after the browser finishes loading available voices.";
+    }
+  }
+
+  function speakScene(onFinished) {
+    if (!("speechSynthesis" in window) ||
+        typeof window.SpeechSynthesisUtterance === "undefined") {
+      voiceStatus.textContent =
+        "Voice playback is unavailable. You can still watch the animation and read each scene.";
+      if (onFinished) onFinished();
+      return;
+    }
+
+    stopSpeech();
+    var myToken = speechToken;
+    var utterance = new SpeechSynthesisUtterance(scenes[current].voice);
+    var selectedVoice = getSelectedVoice();
+
+    if (selectedVoice) {
+      utterance.voice = selectedVoice;
+      utterance.lang = selectedVoice.lang || "en-US";
+    } else {
+      utterance.lang = "en-US";
+    }
+
+    utterance.rate = Number(speedSelect.value) || 0.92;
+    utterance.pitch = 0.88;
+    utterance.volume = 1;
+
+    utterance.onend = function () {
+      if (myToken !== speechToken) return;
+      if (onFinished) onFinished();
+    };
+
+    utterance.onerror = function () {
+      if (myToken !== speechToken) return;
+      voiceStatus.textContent =
+        "The selected voice could not play. Try another English voice.";
+      if (onFinished) onFinished();
+    };
+
+    try {
+      window.speechSynthesis.speak(utterance);
+      voiceStatus.textContent = selectedVoice
+        ? "Narration voice: " + selectedVoice.name + " · " +
+          selectedVoice.lang
+        : "Using the browser's default English voice.";
+    } catch (e) {
+      voiceStatus.textContent =
+        "Narration could not start. Check the browser's audio support.";
+      if (onFinished) onFinished();
+    }
+  }
+
+  function scheduleNextScene() {
+    clearTimeout(sceneTimer);
+    if (!moviePlaying) return;
+
+    // Give narration time to finish. The generous delay is a fallback
+    // for browsers whose speech-end event is unreliable.
+    sceneTimer = setTimeout(function () {
+      if (!moviePlaying) return;
+      current = (current + 1) % scenes.length;
       render();
+      speakScene(function () {
+        if (moviePlaying) scheduleNextScene();
+      });
+    }, 18000);
+  }
 
-      if (speaking) {
-        speakCurrentScene();
-      } else {
-        status.textContent =
-          "Ready · Scene " + (current + 1) +
-          " of " + scenes.length;
-      }
+  function playMovie() {
+    if (moviePlaying) {
+      stopMovie();
+      voiceStatus.textContent = "Movie paused.";
+      return;
     }
 
-    document.getElementById("back").addEventListener("click", function () {
-      goToScene(current - 1);
-    });
-
-    document.getElementById("next").addEventListener("click", function () {
-      goToScene(current + 1);
-    });
-
-    playButton.addEventListener("click", function () {
-      if (speaking) {
-        stopSpeech();
-        status.textContent =
-          "Narration stopped · Scene " +
-          (current + 1) + " of " + scenes.length;
-      } else {
-        speaking = true;
-        playButton.textContent = "Ⅱ Stop narration";
-        speakCurrentScene();
-      }
-    });
-
-    document.getElementById("replay").addEventListener("click", function () {
-      speaking = true;
-      playButton.textContent = "Ⅱ Stop narration";
-      speakCurrentScene();
-    });
-
-    // Render the first scene immediately.
+    moviePlaying = true;
+    playButton.textContent = "Ⅱ Stop movie";
     render();
 
-    status.textContent =
-      "Ready · Scene 1 of " + scenes.length +
-      " · Tap Next to test the presentation.";
+    speakScene(function () {
+      if (moviePlaying) scheduleNextScene();
+    });
 
-  })();
-  </script>
+    // Fallback advances the movie if speech events are not fired.
+    clearTimeout(sceneTimer);
+    sceneTimer = setTimeout(function advanceFallback() {
+      if (!moviePlaying) return;
+      if (current === scenes.length - 1) {
+        stopMovie();
+        voiceStatus.textContent = "Presentation complete.";
+        return;
+      }
+      current++;
+      render();
+      speakScene(function () {
+        if (moviePlaying) scheduleNextScene();
+      });
+      sceneTimer = setTimeout(advanceFallback, 22000);
+    }, 22000);
+  }
+
+  function goTo(index) {
+    current = (index + scenes.length) % scenes.length;
+    render();
+
+    if (moviePlaying) {
+      clearTimeout(sceneTimer);
+      speakScene(function () {
+        if (moviePlaying) scheduleNextScene();
+      });
+    } else {
+      voiceStatus.textContent =
+        "Scene " + (current + 1) + " of " + scenes.length +
+        ". Tap Play movie or Replay narration.";
+    }
+  }
+
+  document.getElementById("back").addEventListener("click", function () {
+    goTo(current - 1);
+  });
+
+  document.getElementById("next").addEventListener("click", function () {
+    goTo(current + 1);
+  });
+
+  playButton.addEventListener("click", playMovie);
+
+  document.getElementById("replay").addEventListener("click", function () {
+    speakScene();
+  });
+
+  voiceSelect.addEventListener("change", function () {
+    var selected = getSelectedVoice();
+    voiceStatus.textContent = selected
+      ? "Selected voice: " + selected.name + " (" + selected.lang + ")."
+      : "Using the browser's default voice.";
+  });
+
+  if ("speechSynthesis" in window) {
+    loadVoices();
+    window.speechSynthesis.onvoiceschanged = loadVoices;
+    setTimeout(loadVoices, 500);
+    setTimeout(loadVoices, 1500);
+  }
+
+  // Ambient cinematic particles, with a safe static fallback.
+  function resizeCanvas() {
+    if (!ctx) return;
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.floor(window.innerWidth * dpr);
+    canvas.height = Math.floor(window.innerHeight * dpr);
+    canvas.style.width = window.innerWidth + "px";
+    canvas.style.height = window.innerHeight + "px";
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    var count = Math.min(65, Math.floor(window.innerWidth / 7));
+    particles = [];
+    for (var i = 0; i < count; i++) {
+      particles.push({
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        r: Math.random() * 1.8 + .4,
+        speed: Math.random() * .35 + .08,
+        alpha: Math.random() * .5 + .12,
+        drift: Math.random() * .35 - .175
+      });
+    }
+  }
+
+  function drawParticles() {
+    if (!ctx) return;
+
+    ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+
+    particles.forEach(function (p) {
+      p.y -= p.speed;
+      p.x += p.drift;
+
+      if (p.y < -5) {
+        p.y = window.innerHeight + 5;
+        p.x = Math.random() * window.innerWidth;
+      }
+
+      if (p.x < -5) p.x = window.innerWidth + 5;
+      if (p.x > window.innerWidth + 5) p.x = -5;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = "rgba(138,243,210," + p.alpha + ")";
+      ctx.fill();
+    });
+
+    if (!reducedMotion) requestAnimationFrame(drawParticles);
+  }
+
+  render();
+  resizeCanvas();
+
+  if (ctx) {
+    if (reducedMotion) {
+      drawParticles();
+    } else {
+      requestAnimationFrame(drawParticles);
+    }
+  }
+
+  window.addEventListener("resize", resizeCanvas);
+
+})();
+</script>
 </body>
 </html>
