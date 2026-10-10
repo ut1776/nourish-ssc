@@ -16,17 +16,15 @@ The project aligns with the public goals of the National Institutes of Health (N
 
 The official challenge describes a three-phase federal prize competition with up to **$650,000 in total prizes**. The Phase 1 submission period is October 1, 2026, through January 8, 2027.
 
-For an independent developer, building a working prototype for this challenge is an opportunity to address a meaningful problem in autoimmune digital health: making nutrition-related experiences and symptoms easier to review and discuss during clinical follow-up.
+This project is an independent effort to address a meaningful problem in autoimmune digital health. Mention of the challenge does not imply NIH sponsorship, selection, funding, approval, or endorsement.
 
-**Important:** This is an independent project. Mention of NIH and its challenge does not imply NIH sponsorship, selection, funding, approval, or endorsement.
-
-Official source: [NIH — NOURISH: Autoimmunity Digital Health Challenge](https://www.nih.gov/challenges/nourish-autoimmunity-digital-health-challenge)
+Official source: https://www.nih.gov/challenges/nourish-autoimmunity-digital-health-challenge
 
 ## 2. The problem
 
-Systemic sclerosis is a complex autoimmune connective-tissue disease that can affect multiple organs. Gastrointestinal involvement may contribute to reflux, bloating, reduced appetite, difficulty eating, and other experiences that can affect daily functioning and nutritional well-being.
+Systemic sclerosis is a complex autoimmune connective-tissue disease that can affect multiple organs. Gastrointestinal involvement may contribute to reflux, bloating, reduced appetite, difficulty eating, and other experiences that affect daily functioning and nutritional well-being.
 
-People may find it difficult to remember symptom patterns, describe nutrition-related changes, and keep track of questions that need follow-up during short clinical appointments.
+People may find it difficult to remember symptom patterns, describe nutrition-related changes, and keep track of questions that need follow-up during clinical appointments.
 
 NOURISH-SSc explores a practical workflow connecting three needs:
 
@@ -34,7 +32,7 @@ NOURISH-SSc explores a practical workflow connecting three needs:
 * **Review:** Examine descriptive patterns across saved symptom entries.
 * **Prepare:** Organize recorded information and follow-up items for a healthcare conversation.
 
-The prototype is designed to support self-monitoring and communication. It does not diagnose disease, prescribe diets, or establish that dietary changes caused changes in symptoms.
+The prototype supports self-monitoring and communication. It does not diagnose disease, prescribe diets, or establish that dietary changes caused changes in symptoms.
 
 ## 3. Working prototype
 
@@ -53,11 +51,13 @@ The current prototype includes:
 
 ## 4. Screenshots of the actual application
 
-The following screenshots are stored in the repository's [`screenshots`](https://github.com/ut1776/nourish-ssc/tree/main/screenshots) folder.
+These screenshots are stored in the repository's [`screenshots` folder](https://github.com/ut1776/nourish-ssc/tree/main/screenshots).
 
 ### 4.1 Symptom trends — Image 1576
 
-![NOURISH-SSc symptom trends screen](https://github.com/ut1776/nourish-ssc/raw/main/screenshots/1576.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/ut1776/nourish-ssc/main/screenshots/1576.png" alt="NOURISH-SSc symptom trends screen, image 1576" width="850" />
+</p>
 
 [Open the symptom trends image](https://github.com/ut1776/nourish-ssc/blob/main/screenshots/1576.png)
 
@@ -65,7 +65,9 @@ The trends view helps users review descriptive patterns in their recorded sympto
 
 ### 4.2 Symptom check-in — Image 1577
 
-![NOURISH-SSc symptom check-in screen](https://github.com/ut1776/nourish-ssc/raw/main/screenshots/1577.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/ut1776/nourish-ssc/main/screenshots/1577.png" alt="NOURISH-SSc symptom check-in screen, image 1577" width="850" />
+</p>
 
 [Open the symptom check-in image](https://github.com/ut1776/nourish-ssc/blob/main/screenshots/1577.png)
 
@@ -73,7 +75,9 @@ The check-in view provides a structured way to record symptoms and related exper
 
 ### 4.3 Care summary — Image 1578
 
-![NOURISH-SSc care summary screen](https://github.com/ut1776/nourish-ssc/raw/main/screenshots/1578.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/ut1776/nourish-ssc/main/screenshots/1578.png" alt="NOURISH-SSc care summary screen, image 1578" width="850" />
+</p>
 
 [Open the care summary image](https://github.com/ut1776/nourish-ssc/blob/main/screenshots/1578.png)
 
@@ -81,7 +85,9 @@ The care summary brings recorded information together to help users prepare for 
 
 ### 4.4 Follow-up tracking — Image 1579
 
-![NOURISH-SSc follow-up tracking screen](https://github.com/ut1776/nourish-ssc/raw/main/screenshots/1579.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/ut1776/nourish-ssc/main/screenshots/1579.png" alt="NOURISH-SSc follow-up tracking screen, image 1579" width="850" />
+</p>
 
 [Open the follow-up tracking image](https://github.com/ut1776/nourish-ssc/blob/main/screenshots/1579.png)
 
@@ -99,7 +105,7 @@ flowchart TD
     D --> E
 ```
 
-This diagram represents the intended prototype workflow, not a validated clinical decision pathway.
+This diagram represents the intended prototype workflow. It is not a validated clinical decision pathway.
 
 ## 5. Scientific context: nutrition in systemic sclerosis
 
