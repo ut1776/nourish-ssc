@@ -1,60 +1,639 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>NOURISH-SSc | Nutrition & symptom check-in</title>
 <style>
-:root{--ink:#1d2b2b;--muted:#657575;--bg:#f5f7f5;--card:#fff;--line:#dce5e0;--teal:#176b63;--teal2:#dcefeb;--gold:#f4e8c8;--rose:#f6e3df;--shadow:0 8px 24px rgba(22,55,49,.06)}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}.shell{max-width:1040px;margin:auto;padding:22px 16px 50px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}.brand{display:flex;align-items:center;gap:12px}.mark{width:44px;height:44px;border-radius:14px;background:var(--teal);color:white;display:grid;place-items:center;font-size:23px}.brand h1{font-size:21px;line-height:1.1;margin:0;letter-spacing:.02em}.brand p{margin:4px 0 0;color:var(--muted);font-size:13px}.demo{font-size:12px;font-weight:700;letter-spacing:.07em;background:var(--gold);padding:7px 10px;border-radius:99px;white-space:nowrap}.hero{background:linear-gradient(120deg,#e4f1ed,#f5f7f5 78%);border:1px solid #d6e8e2;border-radius:22px;padding:24px;margin-bottom:18px}.eyebrow{color:var(--teal);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.12em}.hero h2{font-size:clamp(25px,5vw,36px);line-height:1.12;margin:8px 0 10px;max-width:680px}.hero p{color:#455958;margin:0;max-width:700px}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.tab{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:12px;padding:10px 15px;font-weight:700}.tab[aria-selected=true]{background:var(--teal);color:#fff;border-color:var(--teal)}.layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(260px,.85fr);gap:16px}.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow);margin-bottom:16px}.card h3{margin:0 0 5px;font-size:19px}.sub{margin:0 0 18px;color:var(--muted);font-size:14px}.field{margin:17px 0}.field label,.label{display:block;font-weight:700;margin-bottom:7px}.hint{display:block;color:var(--muted);font-size:12px;font-weight:400;margin-top:3px}.rangehead{display:flex;justify-content:space-between;gap:12px;align-items:center}.score{font-weight:800;color:var(--teal);font-variant-numeric:tabular-nums}.scale{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;margin-top:3px}input[type=range]{width:100%;accent-color:var(--teal)}input[type=text],input[type=date],input[type=number],select,textarea{width:100%;padding:11px 12px;border:1px solid #cbd8d2;border-radius:10px;background:white;color:var(--ink)}textarea{min-height:84px;resize:vertical}.checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.check{display:flex;align-items:flex-start;gap:8px;background:#f7f9f8;border:1px solid var(--line);border-radius:11px;padding:10px;font-size:14px}.check input{margin-top:4px;accent-color:var(--teal)}.btnrow{display:flex;gap:9px;flex-wrap:wrap}.btn{border:0;border-radius:11px;padding:12px 16px;font-weight:800}.primary{background:var(--teal);color:white}.secondary{background:#edf3f0;color:var(--teal);border:1px solid var(--line)}.quiet{background:transparent;border:1px solid var(--line);color:var(--muted)}.notice{background:#f8f5eb;border:1px solid #eee2bf;border-radius:12px;padding:12px 14px;color:#5d512f;font-size:13px}.small{font-size:12px;color:var(--muted)}.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.stat{background:#f5f8f6;border-radius:13px;padding:13px}.stat strong{display:block;font-size:23px;color:var(--teal)}.stat span{font-size:12px;color:var(--muted)}.barlist{display:grid;gap:14px}.barrow{display:grid;grid-template-columns:115px 1fr 26px;gap:10px;align-items:center;font-size:13px}.track{height:10px;background:#e7eeea;border-radius:99px;overflow:hidden}.fill{height:100%;background:var(--teal);border-radius:99px}.entry{border:1px solid var(--line);border-radius:12px;padding:13px;margin:10px 0}.entryhead{display:flex;justify-content:space-between;gap:10px;font-weight:800}.pill{font-size:11px;padding:3px 8px;background:var(--teal2);color:var(--teal);border-radius:99px;white-space:nowrap}.summary{white-space:pre-wrap;background:#f7f9f8;border:1px solid var(--line);border-radius:12px;padding:15px;font-size:14px;min-height:190px}.hidden{display:none!important}.footer{margin-top:18px;text-align:center;color:var(--muted);font-size:12px}.divider{height:1px;background:var(--line);margin:18px 0}.empty{color:var(--muted);padding:16px;border:1px dashed var(--line);border-radius:12px;text-align:center}.sr{position:absolute;left:-10000px}@media(max-width:720px){.layout{grid-template-columns:1fr}.hero{padding:20px}.top{align-items:flex-start}.stats{grid-template-columns:repeat(3,minmax(0,1fr))}.card{padding:16px}.barrow{grid-template-columns:100px 1fr 20px}}@media print{body{background:white}.top,.hero,.tabs,.no-print,.footer{display:none!important}.shell{max-width:none;padding:0}.card{box-shadow:none;break-inside:avoid}.hidden{display:block!important}}
+:root{--ink:#1d2b2b;--muted:#657575;--bg:#f5f7f5;--card:#fff;--line:#dce5e0;--teal:#176b63;--teal2:#dcefeb;--gold:#f4e8c8;--rose:#f6e3df;--shadow:0 8px 24px rgba(22,55,49,.06)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.shell{max-width:1040px;margin:auto;padding:22px 16px 50px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px}
+.brand{display:flex;align-items:center;gap:12px}
+.mark{width:44px;height:44px;border-radius:14px;background:var(--teal);color:white;display:grid;place-items:center;font-size:23px}
+.brand h1{font-size:21px;line-height:1.1;margin:0;letter-spacing:.02em}
+.brand p{margin:4px 0 0;color:var(--muted);font-size:13px}
+.demo{font-size:12px;font-weight:700;letter-spacing:.07em;background:var(--gold);padding:7px 10px;border-radius:99px;white-space:nowrap}
+.hero{background:linear-gradient(120deg,#e4f1ed,#f5f7f5 78%);border:1px solid #d6e8e2;border-radius:22px;padding:24px;margin-bottom:18px}
+.eyebrow{color:var(--teal);font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.12em}
+.hero h2{font-size:clamp(25px,5vw,36px);line-height:1.12;margin:8px 0 10px;max-width:680px}
+.hero p{color:#455958;margin:0;max-width:700px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+.tab{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:12px;padding:10px 15px;font-weight:700}
+.tab[aria-selected=true]{background:var(--teal);color:#fff;border-color:var(--teal)}
+.layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(260px,.85fr);gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow);margin-bottom:16px}
+.card h3{margin:0 0 5px;font-size:19px}
+.sub{margin:0 0 18px;color:var(--muted);font-size:14px}
+.field{margin:17px 0}
+.field label,.label{display:block;font-weight:700;margin-bottom:7px}
+.hint{display:block;color:var(--muted);font-size:12px;font-weight:400;margin-top:3px}
+.rangehead{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.score{font-weight:800;color:var(--teal);font-variant-numeric:tabular-nums}
+.scale{display:flex;justify-content:space-between;color:var(--muted);font-size:11px;margin-top:3px}
+input[type=range]{width:100%;accent-color:var(--teal)}
+input[type=text],input[type=date],input[type=number],select,textarea{width:100%;padding:11px 12px;border:1px solid #cbd8d2;border-radius:10px;background:white;color:var(--ink)}
+textarea{min-height:84px;resize:vertical}
+.checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.check{display:flex;align-items:flex-start;gap:8px;background:#f7f9f8;border:1px solid var(--line);border-radius:11px;padding:10px;font-size:14px}
+.check input{margin-top:4px;accent-color:var(--teal)}
+.btnrow{display:flex;gap:9px;flex-wrap:wrap}
+.btn{border:0;border-radius:11px;padding:12px 16px;font-weight:800}
+.primary{background:var(--teal);color:white}
+.secondary{background:#edf3f0;color:var(--teal);border:1px solid var(--line)}
+.quiet{background:transparent;border:1px solid var(--line);color:var(--muted)}
+.notice{background:#f8f5eb;border:1px solid #eee2bf;border-radius:12px;padding:12px 14px;color:#5d512f;font-size:13px}
+.small{font-size:12px;color:var(--muted)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.stat{background:#f5f8f6;border-radius:13px;padding:13px}
+.stat strong{display:block;font-size:23px;color:var(--teal)}
+.stat span{font-size:12px;color:var(--muted)}
+.barlist{display:grid;gap:14px}
+.barrow{display:grid;grid-template-columns:115px 1fr 26px;gap:10px;align-items:center;font-size:13px}
+.track{height:10px;background:#e7eeea;border-radius:99px;overflow:hidden}
+.fill{height:100%;background:var(--teal);border-radius:99px}
+.entry{border:1px solid var(--line);border-radius:12px;padding:13px;margin:10px 0}
+.entryhead{display:flex;justify-content:space-between;gap:10px;font-weight:800}
+.pill{font-size:11px;padding:3px 8px;background:var(--teal2);color:var(--teal);border-radius:99px;white-space:nowrap}
+.summary{white-space:pre-wrap;background:#f7f9f8;border:1px solid var(--line);border-radius:12px;padding:15px;font-size:14px;min-height:190px}
+.hidden{display:none!important}
+.footer{margin-top:18px;text-align:center;color:var(--muted);font-size:12px}
+.divider{height:1px;background:var(--line);margin:18px 0}
+.empty{color:var(--muted);padding:16px;border:1px dashed var(--line);border-radius:12px;text-align:center}
+.sr{position:absolute;left:-10000px}
+@media(max-width:720px){
+.layout{grid-template-columns:1fr}
+.hero{padding:20px}
+.top{align-items:flex-start}
+.stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+.card{padding:16px}
+.barrow{grid-template-columns:100px 1fr 20px}
+}
+@media print{
+body{background:white}
+.top,.hero,.tabs,.no-print,.footer{display:none!important}
+.shell{max-width:none;padding:0}
+.card{box-shadow:none;break-inside:avoid}
+.hidden{display:block!important}
+}
 </style>
 </head>
-<body><main class="shell">
-<header class="top"><div class="brand"><div class="mark" aria-hidden="true">â³</div><div><h1>NOURISH-SSc</h1><p>Nutrition & GI symptom check-in</p></div></div><span class="demo">PHASE 1 DEMO Â· FICTIONAL DATA</span></header>
-<section class="hero"><div class="eyebrow">A clearer picture, one check-in at a time</div><h2>Connect what youâre experiencing with what you want to discuss.</h2><p>Record selected symptoms and eating difficulties, review your own entries over time, and prepare a concise summary for a healthcare visit.</p></section>
-<nav class="tabs no-print" aria-label="Main sections"><button class="tab" data-tab="checkin" aria-selected="true">1. Check-in</button><button class="tab" data-tab="trends" aria-selected="false">2. My trends</button><button class="tab" data-tab="summary" aria-selected="false">3. Care summary</button></nav>
-<section id="view-checkin">
-<div class="layout"><div class="card"><h3>How have you been feeling?</h3><p class="sub">A short self-report. Use your own experience; there are no right or wrong answers.</p>
-<form id="checkForm">
-<div class="field"><label for="entryDate">Date</label><input id="entryDate" type="date" required></div>
-<div class="field"><div class="rangehead"><label for="reflux">Reflux / heartburn</label><output class="score" id="refluxOut">2 / 4</output></div><input id="reflux" type="range" min="0" max="4" value="2"><div class="scale"><span>None</span><span>Severe</span></div></div>
-<div class="field"><div class="rangehead"><label for="bloating">Bloating / abdominal distension</label><output class="score" id="bloatingOut">2 / 4</output></div><input id="bloating" type="range" min="0" max="4" value="2"><div class="scale"><span>None</span><span>Severe</span></div></div>
-<div class="field"><div class="rangehead"><label for="appetite">Reduced appetite</label><output class="score" id="appetiteOut">1 / 4</output></div><input id="appetite" type="range" min="0" max="4" value="1"><div class="scale"><span>Not at all</span><span>A lot</span></div></div>
-<div class="field"><label for="eating">Eating or swallowing difficulty</label><select id="eating"><option value="0">None today</option><option value="1">Mild â eating took extra effort</option><option value="2">Moderate â changed or skipped some food</option><option value="3">Severe â struggled to eat enough</option></select></div>
-<div class="field"><label for="meals">Did symptoms affect meals today?</label><select id="meals"><option>No</option><option>Yes, one meal</option><option>Yes, two or more meals</option><option>I ate less than I intended</option></select></div>
-<div class="field"><label for="nutritionChange">Nutrition-related change or strategy (optional)</label><select id="nutritionChange"><option value="">No change selected</option><option>Smaller or more frequent meals</option><option>Changed food texture or softness</option><option>Changed meal timing</option><option>Changed or avoided a food</option><option>Used a nutrition supplement already discussed with my care team</option><option>Other â described in my note</option></select><span class="hint">Record what you tried or noticed; this app does not recommend a diet or establish that a food caused symptoms.</span></div>
-<div class="field"><label>Other eating or meal observations (optional)</label><div class="checks"><label class="check"><input type="checkbox" name="notesTags" value="Smaller portions">Smaller portions</label><label class="check"><input type="checkbox" name="notesTags" value="Avoided a food">Avoided a food</label><label class="check"><input type="checkbox" name="notesTags" value="Changed meal timing">Changed meal timing</label><label class="check"><input type="checkbox" name="notesTags" value="Needed softer foods">Needed softer foods</label></div></div>
-<div class="field"><label for="foodNote">Food or context note <span class="hint">Optional. Describe what happened; this does not establish a food trigger.</span></label><textarea id="foodNote" placeholder="e.g., ate a smaller dinner because I felt full quickly"></textarea></div>
-<div class="field"><label for="weight">Weight (optional)</label><input id="weight" type="number" min="1" max="1000" step="0.1" placeholder="Only if you already know it"><span class="hint">No weight target or interpretation is provided by this demo.</span></div>
-<div class="btnrow"><button class="btn primary" type="submit">Save check-in</button><button class="btn secondary" type="button" id="demoEntry">Add fictional example</button></div>
-</form></div>
-<aside><div class="card"><h3>Today at a glance</h3><p class="sub">Your current check-in selections</p><div class="stats"><div class="stat"><strong id="todayGI">2.0</strong><span>Symptom average*</span></div><div class="stat"><strong id="todayEat">0</strong><span>Eating difficulty</span></div><div class="stat"><strong id="entryCount">0</strong><span>Saved entries</span></div></div><p class="small">*Average of reflux, bloating, and appetite ratings. This is a simple demo indicator, not a validated clinical score.</p><div class="divider"></div><div class="notice"><strong>Important:</strong> This prototype does not diagnose, calculate malnutrition risk, or recommend treatment. It is not monitored by a healthcare professional.</div></div><div class="card"><h3>Designed to be brief</h3><p class="sub">The goal is a practical recordânot a perfect food diary.</p><ul><li>Symptoms and eating difficulty together</li><li>Optional context notes</li><li>Review before choosing to share</li></ul></div></aside></div>
+<body>
+<main class="shell">
+
+<header class="top">
+  <div class="brand">
+    <div class="mark" aria-hidden="true">✳</div>
+    <div>
+      <h1>NOURISH-SSc</h1>
+      <p>Nutrition & GI symptom check-in</p>
+    </div>
+  </div>
+  <span class="demo">PHASE 1 DEMO · FICTIONAL DATA</span>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">A clearer picture, one check-in at a time</div>
+  <h2>Connect what you’re experiencing with what you want to discuss.</h2>
+  <p>Record selected symptoms and eating difficulties, review your own entries over time, and prepare a concise summary for a healthcare visit.</p>
 </section>
-<section id="view-trends" class="hidden"><div class="layout"><div class="card"><h3>Your symptom timeline</h3><p class="sub">Based only on entries saved in this browser. Sample entries are clearly labeled.</p><div id="trendStats" class="stats"></div><div class="divider"></div><h3>Recent symptom ratings</h3><p class="sub">0 = none, 4 = severe / a lot. These are not validated clinical scores.</p><div id="trendBars" class="barlist"></div></div><div class="card"><h3>Recent entries</h3><div id="entryList"></div><div class="divider"></div><div class="btnrow no-print"><button class="btn secondary" id="exportCsv">Export entries (CSV)</button><button class="btn quiet" id="clearEntries">Clear all entries</button></div><p class="small">Exported entries may contain personal health information. Store or share them carefully.</p></div></div></section>
-<section id="view-summary" class="hidden"><div class="layout"><div class="card"><h3>Care-visit summary</h3><p class="sub">Review this draft and decide whether you want to share it with your care team.</p><div class="field"><label for="period">Summary period</label><select id="period"><option value="7">Last 7 days</option><option value="14">Last 14 days</option><option value="30">Last 30 days</option><option value="all">All saved entries</option></select></div><div class="field"><label for="questions">Questions I want to discuss</label><textarea id="questions" placeholder="e.g., Could I benefit from a dietitian referral?"></textarea></div><div class="btnrow no-print"><button class="btn primary" id="makeSummary">Generate summary</button><button class="btn secondary" id="copySummary">Copy text</button><button class="btn secondary" id="printSummary">Print / Save as PDF</button></div><div class="divider"></div><div id="summaryText" class="summary" aria-live="polite">Select âGenerate summaryâ to create a draft from your saved entries.</div><p class="small">This is a user-generated summary, not a medical record or clinical recommendation.</p></div><div class="card"><h3>Before sharing</h3><ul><li>Check dates and notes for accuracy.</li><li>Remove anything you do not want to share.</li><li>Discuss concerns with a qualified healthcare professional.</li></ul><div class="notice">If you are unable to swallow liquids, cannot keep fluids down, have severe or rapidly worsening symptoms, or believe you may be in immediate danger, seek urgent medical help rather than relying on this tool.</div></div></div></section>
+
+<nav class="tabs no-print" aria-label="Main sections">
+  <button class="tab" data-tab="checkin" aria-selected="true">1. Check-in</button>
+  <button class="tab" data-tab="trends" aria-selected="false">2. My trends</button>
+  <button class="tab" data-tab="summary" aria-selected="false">3. Care summary</button>
+</nav>
+
+<section id="view-checkin">
+  <div class="layout">
+    <div class="card">
+      <h3>How have you been feeling?</h3>
+      <p class="sub">A short self-report. Use your own experience; there are no right or wrong answers.</p>
+
+      <form id="checkForm">
+        <div class="field">
+          <label for="entryDate">Date</label>
+          <input id="entryDate" type="date" required>
+        </div>
+
+        <div class="field">
+          <div class="rangehead">
+            <label for="reflux">Reflux / heartburn</label>
+            <output class="score" id="refluxOut">2 / 4</output>
+          </div>
+          <input id="reflux" type="range" min="0" max="4" value="2">
+          <div class="scale"><span>None</span><span>Severe</span></div>
+        </div>
+
+        <div class="field">
+          <div class="rangehead">
+            <label for="bloating">Bloating / abdominal distension</label>
+            <output class="score" id="bloatingOut">2 / 4</output>
+          </div>
+          <input id="bloating" type="range" min="0" max="4" value="2">
+          <div class="scale"><span>None</span><span>Severe</span></div>
+        </div>
+
+        <div class="field">
+          <div class="rangehead">
+            <label for="appetite">Reduced appetite</label>
+            <output class="score" id="appetiteOut">1 / 4</output>
+          </div>
+          <input id="appetite" type="range" min="0" max="4" value="1">
+          <div class="scale"><span>Not at all</span><span>A lot</span></div>
+        </div>
+
+        <div class="field">
+          <label for="eating">Eating or swallowing difficulty</label>
+          <select id="eating">
+            <option value="0">None today</option>
+            <option value="1">Mild — eating took extra effort</option>
+            <option value="2">Moderate — changed or skipped some food</option>
+            <option value="3">Severe — struggled to eat enough</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="meals">Did symptoms affect meals today?</label>
+          <select id="meals">
+            <option>No</option>
+            <option>Yes, one meal</option>
+            <option>Yes, two or more meals</option>
+            <option>I ate less than I intended</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="nutritionChange">Have you noticed changes in what or how much you eat?</label>
+          <select id="nutritionChange">
+            <option value="Not recorded">Prefer not to say / not recorded</option>
+            <option value="No noticeable change">No noticeable change</option>
+            <option value="Eating smaller portions">Eating smaller portions</option>
+            <option value="Avoiding certain foods">Avoiding certain foods</option>
+            <option value="Choosing different foods">Choosing different foods</option>
+            <option value="Using nutrition drinks or supplements">Using nutrition drinks or supplements</option>
+            <option value="Other">Other</option>
+          </select>
+          <span class="hint">Self-reported only. This does not recommend foods, supplements, or a diet.</span>
+        </div>
+
+        <div class="field">
+          <label>Optional: what else did you notice?</label>
+          <div class="checks">
+            <label class="check"><input type="checkbox" name="notesTags" value="Smaller portions">Smaller portions</label>
+            <label class="check"><input type="checkbox" name="notesTags" value="Avoided a food">Avoided a food</label>
+            <label class="check"><input type="checkbox" name="notesTags" value="Changed meal timing">Changed meal timing</label>
+            <label class="check"><input type="checkbox" name="notesTags" value="Needed softer foods">Needed softer foods</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="foodNote">Food or context note
+            <span class="hint">Optional. Describe what happened; this does not establish a food trigger.</span>
+          </label>
+          <textarea id="foodNote" placeholder="e.g., ate a smaller dinner because I felt full quickly"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="weight">Weight (optional)</label>
+          <input id="weight" type="number" min="1" max="1000" step="0.1" placeholder="Only if you already know it">
+          <span class="hint">No weight target or interpretation is provided by this demo.</span>
+        </div>
+
+        <div class="btnrow">
+          <button class="btn primary" type="submit">Save check-in</button>
+          <button class="btn secondary" type="button" id="demoEntry">Add fictional example</button>
+        </div>
+      </form>
+    </div>
+
+    <aside>
+      <div class="card">
+        <h3>Today at a glance</h3>
+        <p class="sub">Your current check-in selections</p>
+        <div class="stats">
+          <div class="stat"><strong id="todayGI">2.0</strong><span>Symptom average*</span></div>
+          <div class="stat"><strong id="todayEat">0</strong><span>Eating difficulty</span></div>
+          <div class="stat"><strong id="entryCount">0</strong><span>Saved entries</span></div>
+        </div>
+        <p class="small">*Average of reflux, bloating, and appetite ratings. This is a simple demo indicator, not a validated clinical score.</p>
+        <div class="divider"></div>
+        <div class="notice"><strong>Important:</strong> This prototype does not diagnose, calculate malnutrition risk, or recommend treatment. It is not monitored by a healthcare professional.</div>
+      </div>
+
+      <div class="card">
+        <h3>Designed to be brief</h3>
+        <p class="sub">The goal is a practical record—not a perfect food diary.</p>
+        <ul>
+          <li>Symptoms and eating difficulty together</li>
+          <li>Optional context notes</li>
+          <li>Review before choosing to share</li>
+        </ul>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<section id="view-trends" class="hidden">
+  <div class="layout">
+    <div class="card">
+      <h3>Your symptom timeline</h3>
+      <p class="sub">Based only on entries saved in this browser. Sample entries are clearly labeled.</p>
+      <div id="trendStats" class="stats"></div>
+      <div class="divider"></div>
+      <h3>Recent symptom ratings</h3>
+      <p class="sub">0 = none, 4 = severe / a lot. These are not validated clinical scores.</p>
+      <div id="trendBars" class="barlist"></div>
+    </div>
+
+    <div class="card">
+      <h3>Recent entries</h3>
+      <div id="entryList"></div>
+      <div class="divider"></div>
+      <div class="btnrow no-print">
+        <button class="btn secondary" id="exportCsv">Export entries (CSV)</button>
+        <button class="btn quiet" id="clearEntries">Clear all entries</button>
+      </div>
+      <p class="small">Exported entries may contain personal health information. Store or share them carefully.</p>
+    </div>
+  </div>
+</section>
+
+<section id="view-summary" class="hidden">
+  <div class="layout">
+    <div class="card">
+      <h3>Care-visit summary</h3>
+      <p class="sub">Review this draft and decide whether you want to share it with your care team.</p>
+
+      <div class="field">
+        <label for="period">Summary period</label>
+        <select id="period">
+          <option value="7">Last 7 days</option>
+          <option value="14">Last 14 days</option>
+          <option value="30">Last 30 days</option>
+          <option value="all">All saved entries</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="questions">Questions I want to discuss</label>
+        <textarea id="questions" placeholder="e.g., Could I benefit from a dietitian referral?"></textarea>
+      </div>
+
+      <div class="btnrow no-print">
+        <button class="btn primary" id="makeSummary">Generate summary</button>
+        <button class="btn secondary" id="copySummary">Copy text</button>
+        <button class="btn secondary" id="printSummary">Print / Save as PDF</button>
+      </div>
+
+      <div class="divider"></div>
+      <div id="summaryText" class="summary" aria-live="polite">Select “Generate summary” to create a draft from your saved entries.</div>
+      <p class="small">This is a user-generated summary, not a medical record or clinical recommendation.</p>
+    </div>
+
+    <div class="card">
+      <h3>Before sharing</h3>
+      <ul>
+        <li>Check dates and notes for accuracy.</li>
+        <li>Remove anything you do not want to share.</li>
+        <li>Discuss concerns with a qualified healthcare professional.</li>
+      </ul>
+      <div class="notice">If you are unable to swallow liquids, cannot keep fluids down, have severe or rapidly worsening symptoms, or believe you may be in immediate danger, seek urgent medical help rather than relying on this tool.</div>
+    </div>
+  </div>
+</section>
+
 <footer class="footer">NOURISH-SSc is an independent concept prototype. Not affiliated with or endorsed by NIH. Demo entries are fictional. No information is sent to a server by this file; saved entries may remain in this browser until cleared.</footer>
+
 </main>
+
 <script>
 (function(){
-const $=id=>document.getElementById(id); const storeKey='nourish_ssc_entries_v1'; let entries=[];
-function load(){try{entries=JSON.parse(localStorage.getItem(storeKey)||'[]');if(!Array.isArray(entries))entries=[];}catch(e){entries=[];}}
-function persist(){try{localStorage.setItem(storeKey,JSON.stringify(entries));}catch(e){alert('This browser could not save entries persistently. You can still export a summary or CSV during this session.');}}
-function isoToday(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
-$('entryDate').value=isoToday(); ['reflux','bloating','appetite'].forEach(id=>$(id).addEventListener('input',()=>{$(id+'Out').textContent=$(id).value+' / 4';updateAtGlance()})); $('eating').addEventListener('change',updateAtGlance);
-function getTags(){return [...document.querySelectorAll('input[name="notesTags"]:checked')].map(x=>x.value)}
-function formEntry(isDemo=false){return {id:Date.now()+Math.random(),date:$('entryDate').value||isoToday(),reflux:+$('reflux').value,bloating:+$('bloating').value,appetite:+$('appetite').value,eating:+$('eating').value,meals:$('meals').value,nutritionChange:$('nutritionChange').value,tags:getTags(),foodNote:$('foodNote').value.trim(),weight:$('weight').value?Number($('weight').value):null,fictional:!!isDemo}}
-function updateAtGlance(){const avg=((+$('reflux').value + +$('bloating').value + +$('appetite').value)/3).toFixed(1);$('todayGI').textContent=avg;$('todayEat').textContent=$('eating').value;$('entryCount').textContent=entries.length}
-$('checkForm').addEventListener('submit',e=>{e.preventDefault();const item=formEntry(false);const ix=entries.findIndex(x=>x.date===item.date&&!x.fictional);if(ix>=0)entries[ix]=item;else entries.push(item);entries.sort((a,b)=>a.date.localeCompare(b.date));persist();render();alert('Check-in saved in this browser.');});
-$('demoEntry').addEventListener('click',()=>{const examples=[{date:shiftDate(-5),reflux:1,bloating:1,appetite:0,eating:0,meals:'No',nutritionChange:'',tags:[],foodNote:'Fictional example: no notable eating difficulty.',weight:null,fictional:true},{date:shiftDate(-3),reflux:2,bloating:3,appetite:2,eating:1,meals:'Yes, one meal',nutritionChange:'Smaller or more frequent meals',tags:['Smaller portions'],foodNote:'Fictional example: stopped eating early because of fullness.',weight:null,fictional:true},{date:shiftDate(-1),reflux:3,bloating:3,appetite:2,eating:2,meals:'I ate less than I intended',nutritionChange:'Changed meal timing',tags:['Smaller portions','Changed meal timing'],foodNote:'Fictional example: symptoms made dinner difficult.',weight:null,fictional:true}];examples.forEach(x=>{if(!entries.some(e=>e.date===x.date&&e.fictional))entries.push({...x,id:Date.now()+Math.random()})});entries.sort((a,b)=>a.date.localeCompare(b.date));persist();render();switchTab('trends');});
-function shiftDate(n){let d=new Date();d.setDate(d.getDate()+n);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
-function avg(e){return ((e.reflux+e.bloating+e.appetite)/3)}function dateLabel(s){try{return new Date(s+'T12:00:00').toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'})}catch(e){return s}}
-function render(){updateAtGlance();renderTrends();if(!$('summaryText').textContent.startsWith('Select'))makeSummary();}
-function renderTrends(){const sorted=[...entries].sort((a,b)=>a.date.localeCompare(b.date));if(!sorted.length){$('trendStats').innerHTML='<div class="empty">No entries yet</div>';$('trendBars').innerHTML='<div class="empty">Save a check-in or add fictional examples to preview trends.</div>';$('entryList').innerHTML='<div class="empty">Your entries will appear here.</div>';return}const last=sorted.slice(-7);const mean=(k)=> (last.reduce((s,e)=>s+e[k],0)/last.length).toFixed(1);$('trendStats').innerHTML=`<div class="stat"><strong>${last.length}</strong><span>Recent entries</span></div><div class="stat"><strong>${mean('reflux')}</strong><span>Avg. reflux</span></div><div class="stat"><strong>${mean('bloating')}</strong><span>Avg. bloating</span></div>`;let rows=[['Reflux / heartburn','reflux'],['Bloating / distension','bloating'],['Reduced appetite','appetite'],['Eating difficulty','eating']];$('trendBars').innerHTML=rows.map(([label,key])=>{const val=last.reduce((s,e)=>s+e[key],0)/last.length;return `<div class="barrow"><span>${label}</span><div class="track"><div class="fill" style="width:${val/4*100}%"></div></div><strong>${val.toFixed(1)}</strong></div>`}).join('')+`<p class="small">Averages are descriptive summaries of self-reported entries; they are not clinical thresholds.</p>`;$('entryList').innerHTML=[...sorted].reverse().slice(0,8).map(e=>`<div class="entry"><div class="entryhead"><span>${dateLabel(e.date)}</span><span class="pill">${e.fictional?'Fictional sample':'Your entry'}</span></div><div class="small">Reflux ${e.reflux}/4 Â· Bloating ${e.bloating}/4 Â· Appetite ${e.appetite}/4 Â· Eating difficulty ${e.eating}/3</div>${e.meals!=='No'?`<div class="small">Meal impact: ${esc(e.meals)}</div>`:''}${e.nutritionChange?`<div class="small">Nutrition change: ${esc(e.nutritionChange)}</div>`:''}${e.tags?.length?`<div class="small">Observations: ${e.tags.map(esc).join(' Â· ')}</div>`:''}${e.foodNote?`<p>${esc(e.foodNote)}</p>`:''}</div>`).join('')}
-function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function getPeriod(){const p=$('period').value;if(p==='all')return entries;const start=shiftDate(-(Number(p)-1));return entries.filter(e=>e.date>=start&&e.date<=isoToday())}
-function makeSummary(){const arr=[...getPeriod()].sort((a,b)=>a.date.localeCompare(b.date));if(!arr.length){$('summaryText').textContent='No saved entries in this period. Save a check-in or choose a longer period.';return}const mean=k=>(arr.reduce((s,e)=>s+e[k],0)/arr.length).toFixed(1);const dates=arr.map(e=>e.date);let out=`NOURISH-SSc â USER-PREPARED VISIT SUMMARY\nPeriod: ${dateLabel(dates[0])} to ${dateLabel(dates[dates.length-1])}\nEntries included: ${arr.length} (${arr.filter(e=>e.fictional).length} fictional sample entries)\n\nAVERAGE SELF-REPORTED RATINGS (0â4 unless noted)\nâ¢ Reflux / heartburn: ${mean('reflux')} / 4\nâ¢ Bloating / distension: ${mean('bloating')} / 4\nâ¢ Reduced appetite: ${mean('appetite')} / 4\nâ¢ Eating / swallowing difficulty (0â3): ${mean('eating')} / 3\n\nMEAL IMPACT\n${[...new Set(arr.map(e=>e.meals).filter(x=>x&&x!=='No'))].map(x=>'â¢ '+x).join('\n')||'No meal impact recorded.'}\n\nNUTRITION-RELATED CHANGES RECORDED\n${arr.filter(e=>e.nutritionChange).map(e=>`${dateLabel(e.date)}: ${e.nutritionChange}`).join('\n')||'No nutrition-related change selected.'}\n\nNOTES\n${arr.filter(e=>e.foodNote||e.tags?.length).map(e=>`${dateLabel(e.date)}: ${[...(e.tags||[]),e.foodNote].filter(Boolean).join('; ')}`).join('\n')||'No optional notes recorded.'}\n\nQuestions I want to discuss\n${$('questions').value.trim()||'Not entered.'}\n\nImportant context: This is a summary of self-reported entries, not a diagnosis or validated clinical score. These records cannot establish that a food caused a symptom. Please review for accuracy before sharing.`;$('summaryText').textContent=out;return out}
-$('makeSummary').addEventListener('click',makeSummary);$('period').addEventListener('change',makeSummary);$('questions').addEventListener('input',()=>{});$('copySummary').addEventListener('click',async()=>{const t=$('summaryText').textContent;if(!t||t.startsWith('Select')){alert('Generate the summary first.');return}try{await navigator.clipboard.writeText(t);alert('Summary copied.')}catch(e){const r=document.createRange();r.selectNodeContents($('summaryText'));const s=window.getSelection();s.removeAllRanges();s.addRange(r);alert('Select and copy the highlighted summary.')}});$('printSummary').addEventListener('click',()=>{makeSummary();window.print()});
-$('exportCsv').addEventListener('click',()=>{const head=['date','reflux_0_4','bloating_0_4','appetite_0_4','eating_difficulty_0_3','meal_impact','nutrition_change','tags','food_note','weight_optional','fictional_sample'];const rows=entries.map(e=>[e.date,e.reflux,e.bloating,e.appetite,e.eating,e.meals,e.nutritionChange||'',(e.tags||[]).join('; '),e.foodNote,e.weight??'',e.fictional?'yes':'no']);const csv=[head,...rows].map(r=>r.map(x=>'"'+String(x??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');download('nourish_ssc_entries.csv',csv,'text/csv;charset=utf-8;')});function download(name,content,type){const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click();URL.revokeObjectURL(a.href)}
-$('clearEntries').addEventListener('click',()=>{if(confirm('Delete all entries saved in this browser? This cannot be undone.')){entries=[];persist();render();$('summaryText').textContent='Select âGenerate summaryâ to create a draft from your saved entries.'}});
-function switchTab(name){document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===name)));['checkin','trends','summary'].forEach(x=>$('view-'+x).classList.toggle('hidden',x!==name));if(name==='summary')makeSummary()}document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
-load();render();updateAtGlance();
+const $=id=>document.getElementById(id);
+const storeKey='nourish_ssc_entries_v1';
+let entries=[];
+
+function load(){
+  try{
+    entries=JSON.parse(localStorage.getItem(storeKey)||'[]');
+    if(!Array.isArray(entries))entries=[];
+  }catch(e){
+    entries=[];
+  }
+}
+
+function persist(){
+  try{
+    localStorage.setItem(storeKey,JSON.stringify(entries));
+  }catch(e){
+    alert('This browser could not save entries persistently. You can still export a summary or CSV during this session.');
+  }
+}
+
+function isoToday(){
+  const d=new Date();
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+
+$('entryDate').value=isoToday();
+
+['reflux','bloating','appetite'].forEach(id=>{
+  $(id).addEventListener('input',()=>{
+    $(id+'Out').textContent=$(id).value+' / 4';
+    updateAtGlance();
+  });
+});
+
+$('eating').addEventListener('change',updateAtGlance);
+
+function getTags(){
+  return [...document.querySelectorAll('input[name="notesTags"]:checked')].map(x=>x.value);
+}
+
+function formEntry(isDemo=false){
+  return {
+    id:Date.now()+Math.random(),
+    date:$('entryDate').value||isoToday(),
+    reflux:+$('reflux').value,
+    bloating:+$('bloating').value,
+    appetite:+$('appetite').value,
+    eating:+$('eating').value,
+    meals:$('meals').value,
+    nutritionChange:$('nutritionChange').value,
+    tags:getTags(),
+    foodNote:$('foodNote').value.trim(),
+    weight:$('weight').value?Number($('weight').value):null,
+    fictional:!!isDemo
+  };
+}
+
+function updateAtGlance(){
+  const avg=((+$('reflux').value + +$('bloating').value + +$('appetite').value)/3).toFixed(1);
+  $('todayGI').textContent=avg;
+  $('todayEat').textContent=$('eating').value;
+  $('entryCount').textContent=entries.length;
+}
+
+$('checkForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const item=formEntry(false);
+  const ix=entries.findIndex(x=>x.date===item.date&&!x.fictional);
+  if(ix>=0)entries[ix]=item;
+  else entries.push(item);
+  entries.sort((a,b)=>a.date.localeCompare(b.date));
+  persist();
+  render();
+  alert('Check-in saved in this browser.');
+});
+
+$('demoEntry').addEventListener('click',()=>{
+  const examples=[
+    {
+      date:shiftDate(-5),reflux:1,bloating:1,appetite:0,eating:0,
+      meals:'No',nutritionChange:'No noticeable change',tags:[],
+      foodNote:'Fictional example: no notable eating difficulty.',
+      weight:null,fictional:true
+    },
+    {
+      date:shiftDate(-3),reflux:2,bloating:3,appetite:2,eating:1,
+      meals:'Yes, one meal',nutritionChange:'Eating smaller portions',
+      tags:['Smaller portions'],
+      foodNote:'Fictional example: stopped eating early because of fullness.',
+      weight:null,fictional:true
+    },
+    {
+      date:shiftDate(-1),reflux:3,bloating:3,appetite:2,eating:2,
+      meals:'I ate less than I intended',
+      nutritionChange:'Eating smaller portions',
+      tags:['Smaller portions','Changed meal timing'],
+      foodNote:'Fictional example: symptoms made dinner difficult.',
+      weight:null,fictional:true
+    }
+  ];
+
+  examples.forEach(x=>{
+    if(!entries.some(e=>e.date===x.date&&e.fictional)){
+      entries.push({...x,id:Date.now()+Math.random()});
+    }
+  });
+
+  entries.sort((a,b)=>a.date.localeCompare(b.date));
+  persist();
+  render();
+  switchTab('trends');
+});
+
+function shiftDate(n){
+  let d=new Date();
+  d.setDate(d.getDate()+n);
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+
+function avg(e){
+  return ((e.reflux+e.bloating+e.appetite)/3);
+}
+
+function dateLabel(s){
+  try{
+    return new Date(s+'T12:00:00').toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'});
+  }catch(e){
+    return s;
+  }
+}
+
+function render(){
+  updateAtGlance();
+  renderTrends();
+  if(!$('summaryText').textContent.startsWith('Select'))makeSummary();
+}
+
+function renderTrends(){
+  const sorted=[...entries].sort((a,b)=>a.date.localeCompare(b.date));
+
+  if(!sorted.length){
+    $('trendStats').innerHTML='<div class="empty">No entries yet</div>';
+    $('trendBars').innerHTML='<div class="empty">Save a check-in or add fictional examples to preview trends.</div>';
+    $('entryList').innerHTML='<div class="empty">Your entries will appear here.</div>';
+    return;
+  }
+
+  const last=sorted.slice(-7);
+  const mean=(k)=>(last.reduce((s,e)=>s+e[k],0)/last.length).toFixed(1);
+
+  $('trendStats').innerHTML=
+    `<div class="stat"><strong>${last.length}</strong><span>Recent entries</span></div>
+     <div class="stat"><strong>${mean('reflux')}</strong><span>Avg. reflux</span></div>
+     <div class="stat"><strong>${mean('bloating')}</strong><span>Avg. bloating</span></div>`;
+
+  let rows=[
+    ['Reflux / heartburn','reflux'],
+    ['Bloating / distension','bloating'],
+    ['Reduced appetite','appetite'],
+    ['Eating difficulty','eating']
+  ];
+
+  $('trendBars').innerHTML=rows.map(([label,key])=>{
+    const val=last.reduce((s,e)=>s+e[key],0)/last.length;
+    return `<div class="barrow"><span>${label}</span><div class="track"><div class="fill" style="width:${val/4*100}%"></div></div><strong>${val.toFixed(1)}</strong></div>`;
+  }).join('')+
+  `<p class="small">Averages are descriptive summaries of self-reported entries; they are not clinical thresholds.</p>`;
+
+  $('entryList').innerHTML=[...sorted].reverse().slice(0,8).map(e=>
+    `<div class="entry">
+      <div class="entryhead">
+        <span>${dateLabel(e.date)}</span>
+        <span class="pill">${e.fictional?'Fictional sample':'Your entry'}</span>
+      </div>
+      <div class="small">Reflux ${e.reflux}/4 · Bloating ${e.bloating}/4 · Appetite ${e.appetite}/4 · Eating difficulty ${e.eating}/3</div>
+      ${e.meals!=='No'?`<div class="small">Meal impact: ${esc(e.meals)}</div>`:''}
+      ${e.nutritionChange&&e.nutritionChange!=='Not recorded'?`<div class="small">Nutrition change: ${esc(e.nutritionChange)}</div>`:''}
+      ${e.tags?.length?`<div class="small">${e.tags.map(esc).join(' · ')}</div>`:''}
+      ${e.foodNote?`<p>${esc(e.foodNote)}</p>`:''}
+    </div>`
+  ).join('');
+}
+
+function esc(s){
+  return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function getPeriod(){
+  const p=$('period').value;
+  if(p==='all')return entries;
+  const start=shiftDate(-(Number(p)-1));
+  return entries.filter(e=>e.date>=start&&e.date<=isoToday());
+}
+
+function makeSummary(){
+  const arr=[...getPeriod()].sort((a,b)=>a.date.localeCompare(b.date));
+
+  if(!arr.length){
+    $('summaryText').textContent='No saved entries in this period. Save a check-in or choose a longer period.';
+    return;
+  }
+
+  const mean=k=>(arr.reduce((s,e)=>s+e[k],0)/arr.length).toFixed(1);
+  const dates=arr.map(e=>e.date);
+
+  let out=`NOURISH-SSc — USER-PREPARED VISIT SUMMARY
+Period: ${dateLabel(dates[0])} to ${dateLabel(dates[dates.length-1])}
+Entries included: ${arr.length} (${arr.filter(e=>e.fictional).length} fictional sample entries)
+
+AVERAGE SELF-REPORTED RATINGS (0–4 unless noted)
+• Reflux / heartburn: ${mean('reflux')} / 4
+• Bloating / distension: ${mean('bloating')} / 4
+• Reduced appetite: ${mean('appetite')} / 4
+• Eating / swallowing difficulty (0–3): ${mean('eating')} / 3
+
+NUTRITION CHANGES REPORTED
+${[...new Set(arr.map(e=>e.nutritionChange).filter(x=>x&&x!=='Not recorded'))].map(x=>'• '+x).join('\n')||'No nutrition changes recorded.'}
+
+MEAL IMPACT
+${[...new Set(arr.map(e=>e.meals).filter(x=>x&&x!=='No'))].map(x=>'• '+x).join('\n')||'No meal impact recorded.'}
+
+NOTES
+${arr.filter(e=>e.foodNote||e.tags?.length).map(e=>`${dateLabel(e.date)}: ${[...(e.tags||[]),e.foodNote].filter(Boolean).join('; ')}`).join('\n')||'No optional notes recorded.'}
+
+Questions I want to discuss
+${$('questions').value.trim()||'Not entered.'}
+
+Important context: This is a summary of self-reported entries, not a diagnosis or validated clinical score. These records cannot establish that a food caused a symptom. Please review for accuracy before sharing.`;
+
+  $('summaryText').textContent=out;
+  return out;
+}
+
+$('makeSummary').addEventListener('click',makeSummary);
+$('period').addEventListener('change',makeSummary);
+$('questions').addEventListener('input',()=>{});
+
+$('copySummary').addEventListener('click',async()=>{
+  const t=$('summaryText').textContent;
+
+  if(!t||t.startsWith('Select')){
+    alert('Generate the summary first.');
+    return;
+  }
+
+  try{
+    await navigator.clipboard.writeText(t);
+    alert('Summary copied.');
+  }catch(e){
+    const r=document.createRange();
+    r.selectNodeContents($('summaryText'));
+    const s=window.getSelection();
+    s.removeAllRanges();
+    s.addRange(r);
+    alert('Select and copy the highlighted summary.');
+  }
+});
+
+$('printSummary').addEventListener('click',()=>{
+  makeSummary();
+  window.print();
+});
+
+$('exportCsv').addEventListener('click',()=>{
+  const head=[
+    'date','reflux_0_4','bloating_0_4','appetite_0_4',
+    'eating_difficulty_0_3','meal_impact','nutrition_change',
+    'tags','food_note','weight_optional','fictional_sample'
+  ];
+
+  const rows=entries.map(e=>[
+    e.date,e.reflux,e.bloating,e.appetite,e.eating,e.meals,
+    e.nutritionChange||'Not recorded',
+    (e.tags||[]).join('; '),e.foodNote,e.weight??'',
+    e.fictional?'yes':'no'
+  ]);
+
+  const csv=[head,...rows].map(r=>
+    r.map(x=>'"'+String(x??'').replace(/"/g,'""')+'"').join(',')
+  ).join('\r\n');
+
+  download('nourish_ssc_entries.csv',csv,'text/csv;charset=utf-8;');
+});
+
+function download(name,content,type){
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([content],{type}));
+  a.download=name;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+$('clearEntries').addEventListener('click',()=>{
+  if(confirm('Delete all entries saved in this browser? This cannot be undone.')){
+    entries=[];
+    persist();
+    render();
+    $('summaryText').textContent='Select “Generate summary” to create a draft from your saved entries.';
+  }
+});
+
+function switchTab(name){
+  document.querySelectorAll('[data-tab]').forEach(b=>
+    b.setAttribute('aria-selected',String(b.dataset.tab===name))
+  );
+
+  ['checkin','trends','summary'].forEach(x=>
+    $('view-'+x).classList.toggle('hidden',x!==name)
+  );
+
+  if(name==='summary')makeSummary();
+}
+
+document.querySelectorAll('[data-tab]').forEach(b=>
+  b.addEventListener('click',()=>switchTab(b.dataset.tab))
+);
+
+load();
+render();
+updateAtGlance();
 })();
-</script></body></html>
+</script>
+</body>
+</html>
