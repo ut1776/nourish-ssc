@@ -55,41 +55,25 @@ These screenshots are stored in the repository's [`screenshots` folder](https://
 
 ### 4.1 Symptom trends — Image 1576
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/ut1776/nourish-ssc/main/screenshots/1576.png" alt="NOURISH-SSc symptom trends screen, image 1576" width="850" />
-</p>
-
-[Open the symptom trends image](https://github.com/ut1776/nourish-ssc/blob/main/screenshots/1576.png)
+<img src="https://raw.githubusercontent.com/ut1776/nourish-ssc/main/screenshots/IMG_1576.jpeg" alt="NOURISH-SSc symptom trends screen" width="850" />
 
 The trends view helps users review descriptive patterns in their recorded symptom ratings. The output reflects the available entries; it is not a diagnostic result or a prediction.
 
 ### 4.2 Symptom check-in — Image 1577
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/ut1776/nourish-ssc/main/screenshots/1577.png" alt="NOURISH-SSc symptom check-in screen, image 1577" width="850" />
-</p>
-
-[Open the symptom check-in image](https://github.com/ut1776/nourish-ssc/blob/main/screenshots/1577.png)
+<img src="https://raw.githubusercontent.com/ut1776/nourish-ssc/main/screenshots/IMG_1577.jpeg" alt="NOURISH-SSc symptom check-in screen" width="850" />
 
 The check-in view provides a structured way to record symptoms and related experiences. These entries form the basis of the prototype's descriptive summaries.
 
 ### 4.3 Care summary — Image 1578
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/ut1776/nourish-ssc/main/screenshots/1578.png" alt="NOURISH-SSc care summary screen, image 1578" width="850" />
-</p>
-
-[Open the care summary image](https://github.com/ut1776/nourish-ssc/blob/main/screenshots/1578.png)
+<img src="https://raw.githubusercontent.com/ut1776/nourish-ssc/main/screenshots/IMG_1578.jpeg" alt="NOURISH-SSc care summary screen" width="850" />
 
 The care summary brings recorded information together to help users prepare for a clinical conversation. It is a communication aid, not a substitute for professional assessment.
 
 ### 4.4 Follow-up tracking — Image 1579
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/ut1776/nourish-ssc/main/screenshots/1579.png" alt="NOURISH-SSc follow-up tracking screen, image 1579" width="850" />
-</p>
-
-[Open the follow-up tracking image](https://github.com/ut1776/nourish-ssc/blob/main/screenshots/1579.png)
+<img src="https://raw.githubusercontent.com/ut1776/nourish-ssc/main/screenshots/IMG_1579.jpeg" alt="NOURISH-SSc follow-up tracking screen" width="850" />
 
 The follow-up view helps users keep track of recorded concerns and their status, supporting continuity between check-ins and clinical conversations.
 
